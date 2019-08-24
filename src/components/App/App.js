@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import Slider from '../Slider/Slider';
+import Slide from '../Slide/Slide';
+
 import shuffle from 'lodash.shuffle';
-import style from './App.module.css';
+import style from './App.module.scss';
 
 const coinList = [
   {
@@ -32,9 +35,9 @@ const coinList = [
 
 const getRandomAmount = () => {
   const integerPart = Math.floor(Math.random() * 10);
-  const factionalPart = Math.floor(Math.random() * 100) + 1;
+  const fractionalPart = Math.floor(Math.random() * 100) + 1;
   
-  return Number.parseFloat(`${integerPart}.${factionalPart}`);
+  return Number.parseFloat(`${integerPart}.${fractionalPart}`);
 }
 
 const getShuffeledCoins = (arraySorted) => shuffle(arraySorted);
@@ -61,12 +64,13 @@ function App() {
         </button>
       </header>
       <main className={style.main}>
-      {coins.map((coin) => (
-        <span>
-          {coin.name}
-          {coin.value}
-        </span>
-      ))}
+        <Slider>
+          {coins.map((coin) => (
+            <Slide>
+              {coin.name} {coin.value}
+            </Slide>
+          ))}
+        </Slider>
       </main>
     </div>
   );
