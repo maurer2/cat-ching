@@ -25,6 +25,7 @@ function Slider(props) {
           {child}
         </Entry>
       ))}
+      <span>test</span>
     </Container>
   );
 }

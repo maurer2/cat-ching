@@ -1,37 +1,11 @@
 import React, { useState } from 'react';
+import shuffle from 'lodash.shuffle';
+import { coinList } from '../../data/coins.js';
+
 import Slider from '../Slider/Slider';
 import Coin from '../Coin/Coin';
 
-import shuffle from 'lodash.shuffle';
 import style from './App.module.scss';
-
-const coinList = [
-  {
-    name: '1 Pound',
-    value: '1',
-    image: '',
-  },
-  {
-    name: '2 Pound',
-    value: '2',
-    image: '',
-  },
-  {
-    name: '1 Penny',
-    value: '0.01',
-    image: '',
-  },
-  {
-    name: '2 Pennies',
-    value: '0.02',
-    image: '',
-  },
-  {
-    name: '5 Pennies',
-    value: '0.05',
-    image: '',
-  },
-]; 
 
 const getRandomAmount = () => {
   const integerPart = Math.floor(Math.random() * 10);
@@ -65,8 +39,8 @@ function App() {
       </header>
       <main className={style.main}>
         <Slider>
-          {coins.map((coin) => (
-            <Coin name={coin.name} value={coin.value} key={coin.name}/>
+          {coins.map((coin, index) => (
+            <Coin {...coin} key={index}/>
           ))}
         </Slider>
       </main>
