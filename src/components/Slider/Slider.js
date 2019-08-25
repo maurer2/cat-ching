@@ -1,15 +1,31 @@
 import React from 'react';
 import style from './Slider.module.scss';
 
-function Slider(props) {
+const Entry = (props) => {
+  return (
+    <li className={style.slide}>
+      {props.children}
+    </li>
+  );
+}
+
+const Container = (props) => {
   return (
     <ul className={style.slider}>
-      {props.children.map((child, index) => (
-        <li className={style.slide} key={index}>
-          {child}
-        </li>
-      ))}
+      {props.children}
     </ul>
+  );
+}
+
+function Slider(props) {
+  return (
+    <Container>
+      {props.children.map((child, index) => (
+        <Entry key={index}>
+          {child}
+        </Entry>
+      ))}
+    </Container>
   );
 }
 
