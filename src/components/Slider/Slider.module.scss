@@ -4,15 +4,15 @@
   margin: 0;
   padding: 0;
   list-style: none;
-
   overflow-y: scroll;
   scroll-snap-type: x mandatory;
 }
 
 .slide {
   min-width: 100%;
-  background: yellow;
-
   scroll-snap-align: center;
-}
 
+  &:nth-child(odd) {
+    background: whitesmoke;
+  }
+}

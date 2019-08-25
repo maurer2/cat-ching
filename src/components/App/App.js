@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Slider from '../Slider/Slider';
 import Slide from '../Slide/Slide';
+import Coin from '../Coin/Coin';
 
 import shuffle from 'lodash.shuffle';
 import style from './App.module.scss';
@@ -66,8 +67,8 @@ function App() {
       <main className={style.main}>
         <Slider>
           {coins.map((coin) => (
-            <Slide>
-              {coin.name} {coin.value}
+            <Slide key={coin.name}>
+              <Coin name={coin.name} value={coin.value} />
             </Slide>
           ))}
         </Slider>
