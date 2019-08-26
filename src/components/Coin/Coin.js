@@ -5,7 +5,7 @@ import style from './Coin.module.scss';
 
 function Coin({ name, value, image }) {
   const [amount, setAmount] = useState(0);
-
+  const [titleIsVisible, setTitleIsVisible] = useState(false);
   const [htmlId] = useState(() => {
     const newId = uuidv1();
     
@@ -13,14 +13,15 @@ function Coin({ name, value, image }) {
   });
 
   function handleAdd() {
-    const oldAmount = amount;
-
-    setAmount(oldAmount + 1);
+    setAmount(amount + 1);
   }
 
   function handleClear() {
     setAmount(0);
-    console.log(name, 'clicked');
+  }
+
+  function handleVisibilityToggle() {
+    setTitleIsVisible(!titleIsVisible);
   }
 
   function handleChange(event) {
@@ -33,9 +34,11 @@ function Coin({ name, value, image }) {
   return (
     <fieldset className={style.container}>
       <label className={style.header} htmlFor={htmlId}>
-        <span className={style.title}>
-          {name}
-        </span>
+        {titleIsVisible && (
+          <span className={style.title}>
+            {name}
+          </span>
+        )}
         <img className={style.image} src={`/images/${image}`} alt="" />
       </label>
       <div className={style.buttonGroup}>
@@ -45,8 +48,11 @@ function Coin({ name, value, image }) {
         <button className={style.button} onClick={handleClear}>
           Clear
         </button>
+        <button className={style.button} onClick={handleVisibilityToggle}>
+          {titleIsVisible? 'Hide' : 'Show' } Title
+        </button>
       </div>
-      <input value={amount} className={style.input} type="text" readOnly disabled />
+      <input value={amount} className={style.input} type="text" readOnly disabled/>
     </fieldset>
   );
 }
