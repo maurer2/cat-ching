@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import uuidv1 from 'uuid/v1';
 
 import style from './Coin.module.scss';
 
 function Coin({ name, value, image, handleAmountChange }) {
-  const [amount, setAmount] = useState(0);
-  const [titleIsVisible, setTitleIsVisible] = useState(false);
-  const [htmlId] = useState(() => {
-    const newId = uuidv1();
-    
-    return newId;
-  });
+  const [hintIsVisible, setHintIsVisible] = useState(false);
+  const [htmlId] = useState(() => uuidv1());
 
+  /*
   useEffect(() => {
     const totalValue = value * amount;
 
     handleAmountChange(totalValue.toFixed(2));
   }, [amount, value]);
+  */
 
-  function handleAdd() {
-    setAmount(amount + 1);
+  function addAmount() {
+    handleAmountChange(value);
   }
 
-  function handleClear() {
-    setAmount(0);
+  function removeAmount() {
+    handleAmountChange(-value);
   }
 
-  function handleVisibilityToggle() {
-    setTitleIsVisible(!titleIsVisible);
+  function toggleHintVisibility() {
+    setHintIsVisible(!hintIsVisible);
   }
 
   /*
@@ -42,7 +39,7 @@ function Coin({ name, value, image, handleAmountChange }) {
   return (
     <fieldset className={style.container}>
       <label className={style.header} htmlFor={htmlId}>
-        {titleIsVisible && (
+        {hintIsVisible && (
           <span className={style.title}>
             {name}
           </span>
@@ -50,17 +47,29 @@ function Coin({ name, value, image, handleAmountChange }) {
         <img className={style.image} src={`/images/${image}`} alt="" />
       </label>
       <div className={style.buttonGroup}>
-        <button className={style.button} onClick={handleAdd} id={htmlId}>
-          Add
+        <button
+          className={style.button}
+          onClick={addAmount}
+          id={htmlId}
+          type="button"
+        >
+          Add amount
         </button>
-        <button className={style.button} onClick={handleClear}>
-          Clear
+        <button
+          className={style.button}
+          onClick={removeAmount}
+          type="button"
+        >
+          Remove amount
         </button>
-        <button className={style.button} onClick={handleVisibilityToggle}>
-          {titleIsVisible? 'Hide' : 'Show' } Title
+        <button
+          className={style.button}
+          onClick={toggleHintVisibility}
+          type="button"
+        >
+          {hintIsVisible? 'Hide' : 'Show' } hint
         </button>
       </div>
-      <input value={amount} className={style.input} type="text" readOnly disabled/>
     </fieldset>
   );
 }

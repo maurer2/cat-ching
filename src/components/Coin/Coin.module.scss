@@ -18,21 +18,19 @@
   display: block;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  object-fit: contain;
 }
 
 .buttonGroup {
   display: flex;
+  margin: 0 -1rem;
   justify-content: space-evenly;
 }
 
 .button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
   border: 1px solid black;
   border-radius: 0;
-}
-
-.input {
-  display: block;
-  width: 50%;
-  margin: 1rem auto;
-  text-align: center;
 }
