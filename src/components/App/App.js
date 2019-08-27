@@ -53,11 +53,25 @@ function App() {
   return (
     <div className={style.app}>
       <header className={style.header}>
-        Header
-        <div>Target: {targetAmount.toFixed(2)}</div>
-        <div>Current amount: {currentAmount.toFixed(2)}</div>
-        <button onClick={resetState} type="button">
-          Reset order of coins and target amount
+        <h1 className={style.title}>
+          Header
+        </h1>
+        <dl className={style.details}>
+          <dt className={style.detailsKey}>
+            Target amount:
+          </dt>
+          <dt className={style.detailsValue}>
+            {targetAmount.toFixed(2)}
+          </dt>
+          <dt className={style.detailsKey}>
+            Current amount:
+          </dt>
+          <dt className={style.detailsValue}>
+            {currentAmount.toFixed(2)}
+          </dt>
+        </dl>
+        <button className={style.resetButton} onClick={resetState} type="button">
+          Reset
         </button>
       </header>
       <main className={style.main}>

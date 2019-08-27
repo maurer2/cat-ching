@@ -23,14 +23,14 @@
 
 .buttonGroup {
   display: flex;
-  margin: 0 -1rem;
+  margin: 0 -0.5rem;
   justify-content: space-evenly;
 }
 
 .button {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  padding: 1rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  padding: 0.5rem;
   border: 1px solid black;
   border-radius: 0;
 }
