@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import shuffle from 'lodash.shuffle';
 import { coinList } from '../../data/coins.js';
 
@@ -21,6 +21,11 @@ function App() {
   const [currentAmount, setCurrentAmount] = useState(0);
   const [coins, setCoins] = useState(getShuffeledCoins(coinList));
 
+  useEffect(() => {
+    const amountsAreMatching = (currentAmount.toFixed(2)) === (targetAmount.toFixed(2));
+    console.log(amountsAreMatching);
+  }, [currentAmount, targetAmount]);
+
   function resetState() {
     const newAmount = getRandomAmount();
     const newCoins = getShuffeledCoins(coinList);
@@ -31,10 +36,18 @@ function App() {
   }
 
   function handleAmountChange(newAmount) {
-    const oldCurrentAmount = currentAmount;
-    const newCurrentAmount = oldCurrentAmount + parseFloat(newAmount);
+    const newCurrentAmount = currentAmount + parseFloat(newAmount);
+
+    if (newCurrentAmount <= 0) {
+      setCurrentAmount(0);
+      return;
+    }
 
     setCurrentAmount(newCurrentAmount);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
   }
 
   return (
@@ -43,20 +56,22 @@ function App() {
         Header
         <div>Target: {targetAmount.toFixed(2)}</div>
         <div>Current amount: {currentAmount.toFixed(2)}</div>
-        <button type="button" onClick={resetState}>
-          Reset coin order and target amount
+        <button onClick={resetState} type="button">
+          Reset order of coins and target amount
         </button>
       </header>
       <main className={style.main}>
-        <Slider>
-          {coins.map((coin, index) => (
-            <Coin
-              handleAmountChange={handleAmountChange}
-              key={index}
-              {...coin}
-            />
-          ))}
-        </Slider>
+        <form className={style.form} onSubmit={handleSubmit} action="" method="">
+          <Slider>
+            {coins.map((coin, index) => (
+              <Coin
+                handleAmountChange={handleAmountChange}
+                key={index}
+                {...coin}
+              />
+            ))}
+          </Slider>
+        </form>
       </main>
     </div>
   );
