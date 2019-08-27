@@ -20,11 +20,13 @@ function App() {
   const [targetAmount, setTargetAmount] = useState(getRandomAmount());
   const [currentAmount, setCurrentAmount] = useState(0);
   const [coins, setCoins] = useState(getShuffeledCoins(coinList));
+  const [overlayIsVisible, setOverlayIsVisible] = useState(false);
 
   useEffect(() => {
     const amountsAreMatching = (currentAmount.toFixed(2)) === (targetAmount.toFixed(2));
-    console.log(amountsAreMatching);
-  }, [currentAmount, targetAmount]);
+
+    setOverlayIsVisible(amountsAreMatching);
+  }, [currentAmount, targetAmount, overlayIsVisible]);
 
   function resetState() {
     const newAmount = getRandomAmount();
@@ -51,7 +53,7 @@ function App() {
   }
 
   return (
-    <div className={style.app}>
+    <div className={style.container}>
       <header className={style.header}>
         <h1 className={style.title}>
           Header
@@ -86,6 +88,13 @@ function App() {
             ))}
           </Slider>
         </form>
+        {overlayIsVisible && (
+          <aside className={style.overlay}>
+            <p className={style.overlayText}>
+              Purrfect!
+            </p>
+          </aside>
+        )}
       </main>
     </div>
   );
