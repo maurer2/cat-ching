@@ -26,6 +26,7 @@ function App() {
     const newCoins = getShuffeledCoins(coinList);
     
     setTargetAmount(newAmount);
+    setCurrentAmount(0);
     setCoins(newCoins);
   }
 
