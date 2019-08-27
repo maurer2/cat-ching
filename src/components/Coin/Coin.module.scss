@@ -16,8 +16,8 @@
 
 .image {
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem auto;
+  max-width: 90%;
   object-fit: contain;
 }
 
