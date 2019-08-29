@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import shuffle from 'lodash.shuffle';
 import { coinList } from '../../data/coins.js';
 
-import Slider from '../Slider/Slider';
-import Coin from '../Coin/Coin';
+import Slider from '../Slider';
+import Coin from '../Coin';
 
 import style from './App.module.scss';
 
