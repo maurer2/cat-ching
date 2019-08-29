@@ -1,4 +1,4 @@
-export const coinList = [
+export default [
   {
     name: '1 Pound',
     value: 1,
@@ -39,4 +39,4 @@ export const coinList = [
     value: 0.50,
     image: '50p.png',
   },
-]; 
+];

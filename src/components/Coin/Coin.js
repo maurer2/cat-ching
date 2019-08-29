@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import uuidv1 from 'uuid/v1';
+import PropTypes from 'prop-types';
 
 import style from './Coin.module.scss';
 
@@ -67,7 +68,8 @@ function Coin({ name, value, image, handleAmountChange }) {
           onClick={toggleHintVisibility}
           type="button"
         >
-          {hintIsVisible? 'Hide' : 'Show' } hint
+          {hintIsVisible ? 'Hide' : 'Show' }
+          hint
         </button>
       </div>
     </fieldset>
@@ -75,3 +77,10 @@ function Coin({ name, value, image, handleAmountChange }) {
 }
 
 export default Coin;
+
+Coin.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  handleAmountChange: PropTypes.func.isRequired,
+};

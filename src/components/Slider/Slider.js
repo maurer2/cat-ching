@@ -1,26 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import style from './Slider.module.scss';
 
-const Entry = (props) => {
-  return (
-    <li className={style.slide}>
-      {props.children}
-    </li>
-  );
-}
+const Entry = ({ children }) => (
+  <li className={style.slide}>
+    {children}
+  </li>
+);
 
-const Container = (props) => {
-  return (
-    <ul className={style.slider}>
-      {props.children}
-    </ul>
-  );
-}
+const Container = ({ children }) => (
+  <ul className={style.slider}>
+    {children}
+  </ul>
+);
 
-function Slider(props) {
+function Slider({ children }) {
   return (
     <Container>
-      {props.children.map((child, index) => (
+      {children.map((child, index) => (
         <Entry key={index}>
           {child}
         </Entry>
@@ -30,3 +28,15 @@ function Slider(props) {
 }
 
 export default Slider;
+
+Slider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Container.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Entry.propTypes = {
+  children: PropTypes.node.isRequired,
+};
