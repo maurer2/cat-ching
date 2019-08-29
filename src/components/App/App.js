@@ -79,10 +79,10 @@ function App() {
       <main className={style.main}>
         <form className={style.form} onSubmit={handleSubmit} action="" method="">
           <Slider>
-            {coins.map((coin, index) => (
+            {coins.map(coin => (
               <Coin
                 handleAmountChange={handleAmountChange}
-                key={index}
+                key={coin.name}
                 {...coin}
               />
             ))}

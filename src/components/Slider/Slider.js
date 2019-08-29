@@ -18,8 +18,8 @@ const Container = ({ children }) => (
 function Slider({ children }) {
   return (
     <Container>
-      {children.map((child, index) => (
-        <Entry key={index}>
+      {React.Children.map(children, child => (
+        <Entry key={child.props.name}>
           {child}
         </Entry>
       ))}
