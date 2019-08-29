@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  padding: 1rem;
+  flex-wrap: wrap;
+  text-align: center;
+  background: black;
+  color: white;
+}
+  
+.title {
+  margin-top: 0;
+  flex-basis: 100%;
+  font-size: 1.5rem;
+}
+
+.details {
+  display: flex;
+  margin: 0;
+  flex-wrap: wrap;
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.detailsKey {
+  flex-basis: 75%;
+}
+
+.detailsValue {
+  margin: 0;
+  flex-basis: 25%;
+}
+
+.resetButton {
+  display: block;
+  flex-basis: 0;
+  background: white;
+  color: black;
+}
+
+.headerColumn {
+  white-space: nowrap;
+}

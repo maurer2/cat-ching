@@ -4,47 +4,6 @@
   min-height: 100vh;
 }
 
-.header {
-  display: flex;
-  padding: 1rem;
-  flex-wrap: wrap;
-  text-align: center;
-  background: black;
-  color: white;
-}
-
-.title {
-  margin-top: 0;
-  flex-basis: 100%;
-  font-size: 1.5rem;
-}
-
-.details {
-  display: flex;
-  margin: 0;
-  flex-wrap: wrap;
-  flex-basis: 0;
-  flex-grow: 1;
-  text-align: left;
-}
-
-.detailsKey {
-  flex-basis: 75%;
-}
-
-.detailsValue {
-  flex-basis: 25%;
-}
-
-.resetButton {
-  display: block;
-  flex-basis: 0;
-}
-
-.headerColumn {
-  white-space: nowrap;
-}
-
 .main {
   position: relative;
   display: flex;
@@ -55,22 +14,4 @@
 
 .form {
   display: contents;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(3px) grayscale(100%);
-}
-
-.overlayText {
-  padding: 1rem;
-  font-size: 2rem;
-  background: white;
 }

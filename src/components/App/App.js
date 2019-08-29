@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import shuffle from 'lodash.shuffle';
 import coinList from '../../data/coins';
 
+import Header from '../Header';
 import Slider from '../Slider';
 import Coin from '../Coin';
+import Overlay from '../Overlay';
 
 import style from './App.module.scss';
 
@@ -54,30 +56,18 @@ function App() {
 
   return (
     <div className={style.container}>
-      <header className={style.header}>
-        <h1 className={style.title}>
-          Header
-        </h1>
-        <dl className={style.details}>
-          <dt className={style.detailsKey}>
-            Target amount:
-          </dt>
-          <dt className={style.detailsValue}>
-            {targetAmount.toFixed(2)}
-          </dt>
-          <dt className={style.detailsKey}>
-            Current amount:
-          </dt>
-          <dt className={style.detailsValue}>
-            {currentAmount.toFixed(2)}
-          </dt>
-        </dl>
-        <button className={style.resetButton} onClick={resetState} type="button">
-          Reset
-        </button>
-      </header>
+      <Header
+        targetAmount={targetAmount}
+        currentAmount={currentAmount}
+        handleReset={resetState}
+      />
       <main className={style.main}>
-        <form className={style.form} onSubmit={handleSubmit} action="" method="">
+        <form
+          className={style.form}
+          onSubmit={handleSubmit}
+          action=""
+          method=""
+        >
           <Slider>
             {coins.map(coin => (
               <Coin
@@ -88,13 +78,7 @@ function App() {
             ))}
           </Slider>
         </form>
-        {overlayIsVisible && (
-          <aside className={style.overlay}>
-            <p className={style.overlayText}>
-              Purrfect!
-            </p>
-          </aside>
-        )}
+        {overlayIsVisible && <Overlay />}
       </main>
     </div>
   );
