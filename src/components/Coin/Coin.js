@@ -6,7 +6,7 @@ import style from './Coin.module.scss';
 
 function Coin({ name, value, image, handleAmountChange }) {
   const [hintIsVisible, setHintIsVisible] = useState(false);
-  const [htmlId] = useState(() => uuidv1());
+  const htmlId = React.useRef(uuidv1());
 
   /*
   useEffect(() => {
@@ -39,7 +39,7 @@ function Coin({ name, value, image, handleAmountChange }) {
 
   return (
     <fieldset className={style.container}>
-      <label className={style.header} htmlFor={htmlId}>
+      <label className={style.header} htmlFor={htmlId.current}>
         {hintIsVisible && (
           <span className={style.title}>
             {name}
@@ -51,7 +51,7 @@ function Coin({ name, value, image, handleAmountChange }) {
         <button
           className={style.button}
           onClick={addAmount}
-          id={htmlId}
+          id={htmlId.current}
           type="button"
         >
           Add amount
