@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import shuffle from 'lodash.shuffle';
-import coinList from '../../data/coins';
 
 import Header from '../Header';
 import Slider from '../Slider';
@@ -18,10 +17,10 @@ const getRandomAmount = () => {
 
 const getShuffeledCoins = arraySorted => shuffle(arraySorted);
 
-function App() {
+function App({coinData}) {
   const [targetAmount, setTargetAmount] = useState(getRandomAmount());
   const [currentAmount, setCurrentAmount] = useState(0);
-  const [coins, setCoins] = useState(getShuffeledCoins(coinList));
+  const [coins, setCoins] = useState(getShuffeledCoins(coinData));
   const [overlayIsVisible, setOverlayIsVisible] = useState(false);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function App() {
 
   function resetState() {
     const newAmount = getRandomAmount();
-    const newCoins = getShuffeledCoins(coinList);
+    const newCoins = getShuffeledCoins(coinData);
 
     setTargetAmount(newAmount);
     setCurrentAmount(0);
