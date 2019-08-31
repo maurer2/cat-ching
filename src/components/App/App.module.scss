@@ -1,11 +1,11 @@
 .container {
   display: flex;
+  position: relative;
   flex-direction: column;
   min-height: 100vh;
 }
 
 .main {
-  position: relative;
   display: flex;
   flex-grow: 1;
   background: white;

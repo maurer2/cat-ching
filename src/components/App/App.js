@@ -86,9 +86,9 @@ function App({ coinData }) {
             ))}
           </Slider>
         </form>
-        {overlayIsVisible && <Overlay />}
       </main>
       <Footer currentAmount={currentAmount} />
+      {overlayIsVisible && <Overlay />}
     </div>
   );
 }
