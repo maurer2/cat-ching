@@ -4,28 +4,29 @@ import PropTypes from 'prop-types';
 import style from './Header.module.scss';
 
 function Header({ targetAmount, currentAmount, handleReset }) {
-  const targetAmountFormatted = targetAmount.valueFormatted;
-  const currentAmountFormatted = currentAmount.valueFormatted;
-
   return (
     <header className={style.header}>
       <h1 className={style.title}>
         Header
       </h1>
-      <dl className={style.details}>
-        <dt className={style.detailsKey}>
-          Target amount:
-        </dt>
-        <dd className={style.detailsValue}>
-          {targetAmountFormatted}
-        </dd>
-        <dt className={style.detailsKey}>
-          Current amount:
-        </dt>
-        <dd className={style.detailsValue}>
-          {currentAmountFormatted}
-        </dd>
-      </dl>
+      <div className={style.details}>
+        <dl className={style.detail}>
+          <dt className={style.detailKey}>
+            Target amount:
+          </dt>
+          <dd className={style.detailValue}>
+            {targetAmount.valueFormatted}
+          </dd>
+        </dl>
+        <dl className={style.detail}>
+          <dt className={style.detailKey}>
+            Current amount:
+          </dt>
+          <dd className={style.detailValue}>
+            {currentAmount.valueFormatted}
+          </dd>
+        </dl>
+      </div>
       <button
         className={style.resetButton}
         onClick={handleReset}
@@ -39,8 +40,20 @@ function Header({ targetAmount, currentAmount, handleReset }) {
 
 export default Header;
 
+const { string, number, func, shape } = PropTypes;
+
 Header.propTypes = {
-  targetAmount: PropTypes.object.isRequired,
-  currentAmount: PropTypes.object.isRequired,
-  handleReset: PropTypes.func.isRequired,
+  targetAmount: shape({
+    value: number.isRequired,
+    currency: string.isRequired,
+    valueInCents: number.isRequired,
+    valueFormatted: string.isRequired,
+  }).isRequired,
+  currentAmount: shape({
+    value: number.isRequired,
+    currency: string.isRequired,
+    valueInCents: number.isRequired,
+    valueFormatted: string.isRequired,
+  }).isRequired,
+  handleReset: func.isRequired,
 };

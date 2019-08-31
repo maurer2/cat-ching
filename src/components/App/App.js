@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 
 import Money from '../../data/money';
@@ -17,9 +18,9 @@ const getRandomAmount = () => {
   return Number.parseInt(`${integer}.${fraction}` * 100, 10);
 };
 
-const getShuffeledCoins = arraySorted => shuffle(arraySorted);
+const getShuffeledCoins = (arraySorted) => shuffle(arraySorted);
 
-function App({coinData}) {
+function App({ coinData }) {
   const [targetAmount, setTargetAmount] = useState(() => {
     const newAmount = getRandomAmount();
 
@@ -74,11 +75,13 @@ function App({coinData}) {
           method=""
         >
           <Slider>
-            {coins.map(coin => (
+            {coins.map((coin) => (
               <Coin
+                name={coin.name}
+                image={coin.image}
+                amount={coin.amount}
                 handleAmountChange={handleAmountChange}
                 key={coin.name}
-                {...coin}
               />
             ))}
           </Slider>
@@ -90,3 +93,20 @@ function App({coinData}) {
 }
 
 export default App;
+
+const { string, number, shape, arrayOf } = PropTypes;
+
+App.propTypes = {
+  coinData: arrayOf(
+    shape({
+      amount: shape({
+        value: number.isRequired,
+        currency: string.isRequired,
+        valueInCents: number.isRequired,
+        valueFormatted: string.isRequired,
+      }).isRequired,
+      image: string.isRequired,
+      name: string.isRequired,
+    }),
+  ).isRequired,
+};

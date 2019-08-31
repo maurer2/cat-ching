@@ -18,8 +18,8 @@ const Container = ({ children }) => (
 function Slider({ children }) {
   return (
     <Container>
-      {React.Children.map(children, child => (
-        <Entry key={child.props.name}>
+      {React.Children.map(children, (child) => (
+        <Entry>
           {child}
         </Entry>
       ))}
@@ -29,14 +29,16 @@ function Slider({ children }) {
 
 export default Slider;
 
+const { node } = PropTypes;
+
 Slider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: node.isRequired,
 };
 
 Container.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: node.isRequired,
 };
 
 Entry.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: node.isRequired,
 };

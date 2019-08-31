@@ -10,7 +10,7 @@ export default class Money {
 
   get valueFormatted() {
     const formattedValue = this.value / 100;
-    
+
     return formattedValue.toFixed(2);
   }
-};
+}

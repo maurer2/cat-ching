@@ -15,16 +15,16 @@ const Button = ({ handleOnClick, id, children }) => (
   </button>
 );
 
-function Coin({ name, image, value, handleAmountChange }) {
+function Coin({ name, image, amount, handleAmountChange }) {
   const [hintIsVisible, setHintIsVisible] = useState(false);
   const htmlId = React.useRef(uuidv1());
 
   function addAmount() {
-    handleAmountChange(value.valueInCents);
+    handleAmountChange(amount.valueInCents);
   }
 
   function removeAmount() {
-    handleAmountChange(-value.valueInCents);
+    handleAmountChange(-amount.valueInCents);
   }
 
   function toggleHintVisibility() {
@@ -50,6 +50,7 @@ function Coin({ name, image, value, handleAmountChange }) {
         </Button>
         <Button handleOnClick={toggleHintVisibility}>
           {hintIsVisible ? 'Hide' : 'Show' }
+          {' '}
           hint
         </Button>
       </div>
@@ -63,7 +64,7 @@ const { string, number, func, shape, node } = PropTypes;
 
 Coin.propTypes = {
   name: string.isRequired,
-  value: shape({
+  amount: shape({
     value: number.isRequired,
     currency: string.isRequired,
     valueInCents: number.isRequired,
