@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import style from './Header.module.scss';
 
 function Header({ targetAmount, currentAmount, handleReset }) {
-  const targetAmountFormatted = targetAmount.toFixed(2);
-  const currentAmountFormatted = currentAmount.toFixed(2);
+  const targetAmountFormatted = targetAmount.valueFormatted;
+  const currentAmountFormatted = currentAmount.valueFormatted;
 
   return (
     <header className={style.header}>
@@ -40,7 +40,7 @@ function Header({ targetAmount, currentAmount, handleReset }) {
 export default Header;
 
 Header.propTypes = {
-  targetAmount: PropTypes.number.isRequired,
-  currentAmount: PropTypes.number.isRequired,
+  targetAmount: PropTypes.object.isRequired,
+  currentAmount: PropTypes.object.isRequired,
   handleReset: PropTypes.func.isRequired,
 };

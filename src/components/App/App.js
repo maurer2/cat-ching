@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import shuffle from 'lodash.shuffle';
 
+import Money from '../../data/money';
+
 import Header from '../Header';
 import Slider from '../Slider';
 import Coin from '../Coin';
@@ -12,19 +14,23 @@ const getRandomAmount = () => {
   const integer = Math.floor(Math.random() * 10);
   const fraction = Math.floor(Math.random() * 100) + 1;
 
-  return Number.parseFloat(`${integer}.${fraction}`);
+  return Number.parseInt(`${integer}.${fraction}` * 100, 10);
 };
 
 const getShuffeledCoins = arraySorted => shuffle(arraySorted);
 
 function App({coinData}) {
-  const [targetAmount, setTargetAmount] = useState(getRandomAmount());
-  const [currentAmount, setCurrentAmount] = useState(0);
+  const [targetAmount, setTargetAmount] = useState(() => {
+    const newAmount = getRandomAmount();
+
+    return new Money(newAmount, 'Pound');
+  });
+  const [currentAmount, setCurrentAmount] = useState(new Money(0, 'Pound'));
   const [coins, setCoins] = useState(getShuffeledCoins(coinData));
   const [overlayIsVisible, setOverlayIsVisible] = useState(false);
 
   useEffect(() => {
-    const amountsAreMatching = (currentAmount.toFixed(2)) === (targetAmount.toFixed(2));
+    const amountsAreMatching = (currentAmount.valueInCents === targetAmount.valueInCents);
 
     setOverlayIsVisible(amountsAreMatching);
   }, [currentAmount, targetAmount, overlayIsVisible]);
@@ -33,20 +39,20 @@ function App({coinData}) {
     const newAmount = getRandomAmount();
     const newCoins = getShuffeledCoins(coinData);
 
-    setTargetAmount(newAmount);
-    setCurrentAmount(0);
+    setTargetAmount(new Money(newAmount, 'Pound'));
+    setCurrentAmount(new Money(0, 'Pound'));
     setCoins(newCoins);
   }
 
   function handleAmountChange(newAmount) {
-    const newCurrentAmount = currentAmount + parseFloat(newAmount);
+    const newCurrentAmount = currentAmount.valueInCents + newAmount;
 
     if (newCurrentAmount <= 0) {
-      setCurrentAmount(0);
+      setCurrentAmount(new Money(0, 'Pound'));
       return;
     }
 
-    setCurrentAmount(newCurrentAmount);
+    setCurrentAmount(new Money(newCurrentAmount, 'Pound'));
   }
 
   function handleSubmit(event) {

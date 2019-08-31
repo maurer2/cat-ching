@@ -72,7 +72,7 @@ export default Coin;
 
 Coin.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.object.isRequired,
   image: PropTypes.string.isRequired,
   handleAmountChange: PropTypes.func.isRequired,
 };
