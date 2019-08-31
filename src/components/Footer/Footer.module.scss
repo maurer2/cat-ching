@@ -1,0 +1,35 @@
+.footer {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  background: black;
+  color: white;
+}
+
+.detail {
+  display: flex;
+  margin: 0;
+  flex-wrap: wrap;
+  flex-grow: 1;
+
+  & + .detail {
+    margin-top: 0.5rem;
+  }
+}
+
+.detailKey {
+  margin-right: 0.5rem;
+  flex-basis: auto;
+}
+
+.detailValue {
+  margin: 0;
+  font-weight: bold;
+}
+
+.toggleButton {
+  margin-left: auto;
+  padding: 0.5rem;
+  background: white;
+  color: black;
+}

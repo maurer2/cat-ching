@@ -8,6 +8,7 @@ import Header from '../Header';
 import Slider from '../Slider';
 import Coin from '../Coin';
 import Overlay from '../Overlay';
+import Footer from '../Footer';
 
 import style from './App.module.scss';
 
@@ -64,7 +65,6 @@ function App({ coinData }) {
     <div className={style.container}>
       <Header
         targetAmount={targetAmount}
-        currentAmount={currentAmount}
         handleReset={resetState}
       />
       <main className={style.main}>
@@ -88,6 +88,7 @@ function App({ coinData }) {
         </form>
         {overlayIsVisible && <Overlay />}
       </main>
+      <Footer currentAmount={currentAmount} />
     </div>
   );
 }
