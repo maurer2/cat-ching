@@ -35,6 +35,6 @@ module.exports = {
       "ImportDeclaration": "never",
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
-    "import/no-extraneous-dependencies": "disable",
+    "import/no-extraneous-dependencies": "off",
   },
 }

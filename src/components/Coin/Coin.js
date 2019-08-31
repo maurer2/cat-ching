@@ -4,6 +4,17 @@ import PropTypes from 'prop-types';
 
 import style from './Coin.module.scss';
 
+const Button = ({ handleOnClick, id, children }) => (
+  <button
+    className={style.button}
+    onClick={handleOnClick}
+    id={id}
+    type="button"
+  >
+    { children }
+  </button>
+);
+
 function Coin({ name, image, value, handleAmountChange }) {
   const [hintIsVisible, setHintIsVisible] = useState(false);
   const htmlId = React.useRef(uuidv1());
@@ -20,15 +31,6 @@ function Coin({ name, image, value, handleAmountChange }) {
     setHintIsVisible(!hintIsVisible);
   }
 
-  /*
-  function handleChange(event) {
-    const inputValue = event.currentTarget.value;
-    const numberValue = inputValue.replace(/\D/,'');
-
-    setAmount(numberValue);
-  }
-  */
-
   return (
     <fieldset className={style.container}>
       <label className={style.header} htmlFor={htmlId.current}>
@@ -40,29 +42,16 @@ function Coin({ name, image, value, handleAmountChange }) {
         <img className={style.image} src={`/images/${image}`} alt="" />
       </label>
       <div className={style.buttonGroup}>
-        <button
-          className={style.button}
-          onClick={addAmount}
-          id={htmlId.current}
-          type="button"
-        >
+        <Button handleOnClick={addAmount} id={htmlId.current}>
           Add amount
-        </button>
-        <button
-          className={style.button}
-          onClick={removeAmount}
-          type="button"
-        >
+        </Button>
+        <Button handleOnClick={removeAmount}>
           Remove amount
-        </button>
-        <button
-          className={style.button}
-          onClick={toggleHintVisibility}
-          type="button"
-        >
+        </Button>
+        <Button handleOnClick={toggleHintVisibility}>
           {hintIsVisible ? 'Hide' : 'Show' }
           hint
-        </button>
+        </Button>
       </div>
     </fieldset>
   );
@@ -70,9 +59,26 @@ function Coin({ name, image, value, handleAmountChange }) {
 
 export default Coin;
 
+const { string, number, func, shape, node } = PropTypes;
+
 Coin.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.object.isRequired,
-  image: PropTypes.string.isRequired,
-  handleAmountChange: PropTypes.func.isRequired,
+  name: string.isRequired,
+  value: shape({
+    value: number.isRequired,
+    currency: string.isRequired,
+    valueInCents: number.isRequired,
+    valueFormatted: string.isRequired,
+  }).isRequired,
+  image: string.isRequired,
+  handleAmountChange: func.isRequired,
+};
+
+Button.propTypes = {
+  handleOnClick: func.isRequired,
+  id: string,
+  children: node.isRequired,
+};
+
+Button.defaultProps = {
+  id: undefined,
 };
