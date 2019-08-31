@@ -4,24 +4,16 @@ import PropTypes from 'prop-types';
 
 import style from './Coin.module.scss';
 
-function Coin({ name, value, image, handleAmountChange }) {
+function Coin({ name, image, value, handleAmountChange }) {
   const [hintIsVisible, setHintIsVisible] = useState(false);
   const htmlId = React.useRef(uuidv1());
 
-  /*
-  useEffect(() => {
-    const totalValue = value * amount;
-
-    handleAmountChange(totalValue.toFixed(2));
-  }, [amount, value]);
-  */
-
   function addAmount() {
-    handleAmountChange(value);
+    handleAmountChange(value.valueInCents);
   }
 
   function removeAmount() {
-    handleAmountChange(-value);
+    handleAmountChange(-value.valueInCents);
   }
 
   function toggleHintVisibility() {

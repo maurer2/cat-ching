@@ -5,16 +5,27 @@ import App from '../App';
 import coinData from '../../data/coins';
 import Money from '../../data/money';
 
-const getCoins = (Money) => {
-  const x = new Money(1, 'pound');
+const getMoneyList = (Money, coinData) => {
+  const moneyList = coinData.map((entry) => {
+    const { name, value, image } = entry;
 
-  console.log(x.valueInCents);
-  console.log(x.valueFormatted);
+    const moneyObject = new Money(value, 'pound'); 
+
+    return {
+      name,
+      image,
+      value: moneyObject,
+    }
+  });
+
+  return moneyList;
 };
 
 function AppContainer() {
+  const moneyList = getMoneyList(Money, coinData)
+
   return (
-    <App coinData={coinData} />
+    <App coinData={moneyList} />
   );
 }
 
