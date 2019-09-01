@@ -16,7 +16,7 @@ const Button = ({ handleOnClick, id, children }) => (
 );
 
 function Coin({ name, image, amount, handleAmountChange }) {
-  const [hintIsVisible, setHintIsVisible] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const htmlId = React.useRef(uuidv1());
 
   function addAmount() {
@@ -28,13 +28,13 @@ function Coin({ name, image, amount, handleAmountChange }) {
   }
 
   function toggleHintVisibility() {
-    setHintIsVisible(!hintIsVisible);
+    setShowHint(!showHint);
   }
 
   return (
     <fieldset className={style.container}>
       <label className={style.header} htmlFor={htmlId.current}>
-        {hintIsVisible && (
+        {showHint && (
           <span className={style.title}>
             {name}
           </span>
@@ -49,9 +49,7 @@ function Coin({ name, image, amount, handleAmountChange }) {
           Remove amount
         </Button>
         <Button handleOnClick={toggleHintVisibility}>
-          {hintIsVisible ? 'Hide' : 'Show' }
-          {' '}
-          hint
+          {showHint ? 'Hide hint' : 'Show hint' }
         </Button>
       </div>
     </fieldset>

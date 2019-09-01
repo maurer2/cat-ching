@@ -74,7 +74,7 @@ function App({ coinData }) {
           action=""
           method=""
         >
-          <Slider>
+          <Slider key={targetAmount.valueFormatted}>
             {coins.map((coin) => (
               <Coin
                 name={coin.name}

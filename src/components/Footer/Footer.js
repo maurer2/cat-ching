@@ -27,9 +27,7 @@ function Footer({ currentAmount }) {
         onClick={toggleAmountVisbility}
         type="button"
       >
-        {showCurrentAmount ? 'Hide' : 'Show' }
-        {' '}
-        current amount
+        {showCurrentAmount ? 'Hide current amount' : 'Show current amount' }
       </button>
     </footer>
   );
