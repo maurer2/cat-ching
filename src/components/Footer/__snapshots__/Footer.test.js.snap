@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render correctly 1`] = `
+<footer
+  className="footer"
+>
+  <dl
+    className="detail"
+  >
+    <dt
+      className="detailKey"
+    >
+      Current amount:
+    </dt>
+    <dd
+      className="detailValue"
+    >
+      0.01
+    </dd>
+  </dl>
+  <button
+    className="toggleButton"
+    onClick={[Function]}
+    type="button"
+  >
+    Hide current amount
+  </button>
+</footer>
+`;

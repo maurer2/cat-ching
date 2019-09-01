@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import style from './Slider.module.scss';
 
-const Entry = ({ children }) => (
+export const Entry = ({ children }) => (
   <li className={style.slide}>
     {children}
   </li>
 );
 
-const Container = ({ children }) => (
+export const Container = ({ children }) => (
   <ul className={style.slider}>
     {children}
   </ul>
