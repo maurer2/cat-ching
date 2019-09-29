@@ -51,9 +51,6 @@ function Coin({ name, image, amount, size, handleAmountChange }) {
           style={{ width: `${width}%` }}
           alt=""
         />
-        <span>
-          {width}
-        </span>
       </label>
       <div className={style.buttonGroup}>
         <Button handleOnClick={addAmount} id={htmlId.current}>
