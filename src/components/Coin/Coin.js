@@ -15,9 +15,15 @@ const Button = ({ handleOnClick, id, children }) => (
   </button>
 );
 
-function Coin({ name, image, amount, handleAmountChange }) {
+// temp
+const largestWidth = 28.4;
+const calculateRelativeWidth = (width) => (width * 100) / largestWidth;
+
+function Coin({ name, image, amount, size, handleAmountChange }) {
   const [showHint, setShowHint] = useState(false);
   const htmlId = React.useRef(uuidv1());
+
+  const width = calculateRelativeWidth(size.width).toFixed(2);
 
   function addAmount() {
     handleAmountChange(amount.valueInCents);
@@ -39,7 +45,15 @@ function Coin({ name, image, amount, handleAmountChange }) {
             {name}
           </span>
         )}
-        <img className={style.image} src={`/images/${image}`} alt="" />
+        <img
+          className={style.image}
+          src={`/images/${image}`}
+          style={{ width: `${width}%` }}
+          alt=""
+        />
+        <span>
+          {width}
+        </span>
       </label>
       <div className={style.buttonGroup}>
         <Button handleOnClick={addAmount} id={htmlId.current}>
@@ -70,6 +84,11 @@ Coin.propTypes = {
   }).isRequired,
   image: string.isRequired,
   handleAmountChange: func.isRequired,
+  size: shape({
+    width: number.isRequired,
+    height: number.isRequired,
+    unit: string.isRequired,
+  }).isRequired,
 };
 
 Button.propTypes = {

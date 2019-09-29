@@ -7,13 +7,14 @@ import Money from '../../data/money';
 
 const getMoneyList = () => {
   const moneyList = coinData.map((entry) => {
-    const { name, value, image } = entry;
+    const { name, value, image, size } = entry;
 
     const moneyObject = new Money(value, 'pound');
 
     return {
       name,
       image,
+      size,
       amount: moneyObject,
     };
   });

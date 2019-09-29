@@ -82,6 +82,7 @@ function App({ coinData }) {
                 amount={coin.amount}
                 handleAmountChange={handleAmountChange}
                 key={coin.name}
+                size={coin.size}
               />
             ))}
           </Slider>
