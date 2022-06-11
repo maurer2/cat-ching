@@ -36,5 +36,6 @@ module.exports = {
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
     "import/no-extraneous-dependencies": "off",
+    "react/jsx-no-bind": "off", // temp
   },
 }
