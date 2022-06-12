@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 
@@ -31,15 +31,12 @@ function App({ coinData }) {
   });
   const [currentAmount, setCurrentAmount] = useState(new Money(0, 'Pound'));
   const [coins, setCoins] = useState(getShuffledCoins(coinData));
-  const [overlayIsVisible, setOverlayIsVisible] = useState(false);
+  const overlayIsVisible = useMemo<boolean>(
+    () => currentAmount.valueInCents === targetAmount.valueInCents,
+    [currentAmount, targetAmount],
+  );
 
-  useEffect(() => {
-    const amountsAreMatching = (currentAmount.valueInCents === targetAmount.valueInCents);
-
-    setOverlayIsVisible(amountsAreMatching);
-  }, [currentAmount, targetAmount, overlayIsVisible]);
-
-  function resetState() {
+  function resetState(): void {
     const newAmount = getRandomAmount();
     const newCoins = getShuffledCoins(coinData);
 
