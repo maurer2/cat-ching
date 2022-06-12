@@ -21,7 +21,7 @@ const getRandomAmount = () => {
   return Number.parseInt(`${integer}.${fraction}` * 100, 10);
 };
 
-const getShuffeledCoins = (arraySorted) => shuffle(arraySorted);
+const getShuffledCoins = (arraySorted) => shuffle(arraySorted);
 
 function App({ coinData }) {
   const [targetAmount, setTargetAmount] = useState(() => {
@@ -30,7 +30,7 @@ function App({ coinData }) {
     return new Money(newAmount, 'Pound');
   });
   const [currentAmount, setCurrentAmount] = useState(new Money(0, 'Pound'));
-  const [coins, setCoins] = useState(getShuffeledCoins(coinData));
+  const [coins, setCoins] = useState(getShuffledCoins(coinData));
   const [overlayIsVisible, setOverlayIsVisible] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function App({ coinData }) {
 
   function resetState() {
     const newAmount = getRandomAmount();
-    const newCoins = getShuffeledCoins(coinData);
+    const newCoins = getShuffledCoins(coinData);
 
     setTargetAmount(new Money(newAmount, 'Pound'));
     setCurrentAmount(new Money(0, 'Pound'));

@@ -8,7 +8,7 @@ import Money from '../../data/money';
 jest.mock('uuid/v1');
 
 describe('Coin', () => {
-  const mockeHandleAmountChange = jest.fn();
+  const mockedHandleAmountChange = jest.fn();
   const moneyData = new Money(1, 'Dollar');
 
   uuidv1.mockImplementation(() => 'test-id');
@@ -17,7 +17,7 @@ describe('Coin', () => {
     name: '1 dollar',
     image: 'image name',
     amount: moneyData,
-    handleAmountChange: mockeHandleAmountChange,
+    handleAmountChange: mockedHandleAmountChange,
     key: '1 dollar',
   }
 

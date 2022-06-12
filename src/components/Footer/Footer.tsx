@@ -6,7 +6,7 @@ import style from './Footer.module.scss';
 function Footer({ currentAmount }) {
   const [showCurrentAmount, setShowCurrentAmount] = useState(true);
 
-  function toggleAmountVisbility() {
+  function toggleAmountVisibility() {
     setShowCurrentAmount(!showCurrentAmount);
   }
 
@@ -24,7 +24,7 @@ function Footer({ currentAmount }) {
       )}
       <button
         className={style.toggleButton}
-        onClick={toggleAmountVisbility}
+        onClick={toggleAmountVisibility}
         type="button"
       >
         {showCurrentAmount ? 'Hide current amount' : 'Show current amount' }
