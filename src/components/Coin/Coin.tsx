@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import uuidv1 from 'uuid/v1';
+import { v1 as uuidv1 } from 'uuid';
 import PropTypes from 'prop-types';
 
 import style from './Coin.module.scss';
 
-const Button = ({ handleOnClick, id, children }) => (
-  <button
-    className={style.button}
-    onClick={handleOnClick}
-    id={id}
-    type="button"
-  >
-    { children }
-  </button>
-);
+function Button({ handleOnClick, id, children }) {
+  return (
+    <button
+      className={style.button}
+      onClick={handleOnClick}
+      id={id}
+      type="button"
+    >
+      { children }
+    </button>
+  );
+}
 
 // temp
 const largestWidth = 28.4;
@@ -48,7 +50,9 @@ function Coin({ name, image, amount, size, handleAmountChange }) {
         <img
           className={style.image}
           src={`/images/${image}`}
-          style={{ width: `${width}%` }}
+          style={{
+            width: `${width}%`,
+          }}
           alt=""
         />
       </label>

@@ -16,6 +16,8 @@ const getRandomAmount = () => {
   const integer = Math.floor(Math.random() * 10);
   const fraction = Math.floor(Math.random() * 100) + 1;
 
+  // todo
+  // @ts-ignore
   return Number.parseInt(`${integer}.${fraction}` * 100, 10);
 };
 

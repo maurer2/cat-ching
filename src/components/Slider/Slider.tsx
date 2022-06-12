@@ -3,17 +3,21 @@ import PropTypes from 'prop-types';
 
 import style from './Slider.module.scss';
 
-export const Entry = ({ children }) => (
-  <li className={style.slide}>
-    {children}
-  </li>
-);
+function Entry({ children }) {
+  return (
+    <li className={style.slide}>
+      {children}
+    </li>
+  );
+}
 
-export const Container = ({ children }) => (
-  <ul className={style.slider}>
-    {children}
-  </ul>
-);
+function Container({ children }) {
+  return (
+    <ul className={style.slider}>
+      {children}
+    </ul>
+  );
+}
 
 function Slider({ children }) {
   return (
@@ -28,6 +32,11 @@ function Slider({ children }) {
 }
 
 export default Slider;
+
+export {
+  Entry,
+  Container,
+};
 
 const { node } = PropTypes;
 
