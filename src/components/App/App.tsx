@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash.shuffle';
 
@@ -29,9 +29,18 @@ function App({ coinData }) {
 
     return new Money(newAmount, 'Pound');
   });
-  const [currentAmount, setCurrentAmount] = useState(new Money(0, 'Pound'));
+  const [currentAmount, setCurrentAmount] = useReducer((state, action) => {
+    const newCurrentAmount = state.valueInCents + action;
+
+    if (newCurrentAmount <= 0) {
+      return new Money(0, 'Pound');
+    }
+
+    return new Money(newCurrentAmount, 'Pound');
+  }, new Money(0, 'Pound'));
   const [coins, setCoins] = useState(getShuffledCoins(coinData));
   const overlayIsVisible = useMemo<boolean>(
+    // @ts-ignore
     () => currentAmount.valueInCents === targetAmount.valueInCents,
     [currentAmount, targetAmount],
   );
@@ -43,17 +52,6 @@ function App({ coinData }) {
     setTargetAmount(new Money(newAmount, 'Pound'));
     setCurrentAmount(new Money(0, 'Pound'));
     setCoins(newCoins);
-  }
-
-  function handleAmountChange(newAmount) {
-    const newCurrentAmount = currentAmount.valueInCents + newAmount;
-
-    if (newCurrentAmount <= 0) {
-      setCurrentAmount(new Money(0, 'Pound'));
-      return;
-    }
-
-    setCurrentAmount(new Money(newCurrentAmount, 'Pound'));
   }
 
   function handleSubmit(event) {
@@ -79,7 +77,7 @@ function App({ coinData }) {
                 name={coin.name}
                 image={coin.image}
                 amount={coin.amount}
-                handleAmountChange={handleAmountChange}
+                handleAmountChange={setCurrentAmount}
                 key={coin.name}
                 size={coin.size}
               />
