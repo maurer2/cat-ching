@@ -1,9 +1,7 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useId } from 'react';
 
-import Money from '../../types/Money';
-
 import style from './Coin.module.scss';
+import * as Types from './Coin.types';
 
 function Button({ handleOnClick, children }) {
   return (
@@ -21,17 +19,17 @@ function Button({ handleOnClick, children }) {
 const largestWidth = 28.4;
 const calculateRelativeWidth = (width) => (width * 100) / largestWidth;
 
-function Coin({ name, image, amount, size, handleAmountChange }) {
+function Coin({ name, image, amount, size, handleAmountChange }: Types.CoinProps): JSX.Element {
   const [showHint, setShowHint] = useState<boolean>(false);
   const currentId: string = useId();
-  const targetValue = amount as Money;
 
   const width = calculateRelativeWidth(size.width).toFixed(2);
 
   function addAmount(): void {
-    handleAmountChange(targetValue);
+    handleAmountChange(amount);
   }
 
+  // todo
   // function removeAmount(): void {
   // handleAmountChange(targetValue * -1);
   // }

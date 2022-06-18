@@ -10,6 +10,7 @@ import Footer from '../Footer';
 import Overlay from '../Overlay';
 
 import style from './App.module.scss';
+import * as Types from './App.types';
 
 const getRandomAmount = (): number => {
   const integer = Math.floor(Math.random() * 10);
@@ -22,7 +23,7 @@ const getRandomAmount = (): number => {
 
 const getShuffledCoins = (arraySorted) => shuffle(arraySorted);
 
-function App({ coinData }) {
+function App({ coinData }: Types.AppProps): JSX.Element {
   const [targetAmount, setTargetAmount] = useState<Money>(() => {
     const newAmount = getRandomAmount();
 
@@ -37,7 +38,7 @@ function App({ coinData }) {
 
     return newCurrentAmount;
   }, Money.fromNumber(0, 'GBP'));
-  const [coins, setCoins] = useState(getShuffledCoins(coinData));
+  const [coins, setCoins] = useState<typeof coinData>(getShuffledCoins(coinData));
   const overlayIsVisible = useMemo<boolean>(
     () => currentAmount.isEqualTo(targetAmount),
     [currentAmount, targetAmount],
@@ -72,11 +73,11 @@ function App({ coinData }) {
           <Slider key={targetAmount.valueAsFormattedString}>
             {coins.map((coin) => (
               <Coin
+                key={coin.name}
                 name={coin.name}
                 image={coin.image}
                 amount={coin.amount}
                 handleAmountChange={setCurrentAmount}
-                key={coin.name}
                 size={coin.size}
               />
             ))}

@@ -3,25 +3,23 @@
   padding: 1rem;
   flex-wrap: wrap;
   align-items: center;
+  gap: 1rem;
   background: black;
   color: white;
 }
-  
+
 .title {
-  margin-top: 0;
+  margin: 0;
   flex-basis: 100%;
   text-align: center;
   font-size: 1.5rem;
-}
-
-.details {
-  flex-grow: 1;
 }
 
 .detail {
   display: flex;
   margin: 0;
   flex-wrap: wrap;
+  gap: 0.5rem;
 
   & + .detail {
     margin-top: 0.5rem;
@@ -29,7 +27,6 @@
 }
 
 .detailKey {
-  margin-right: 0.5rem;
   flex-basis: auto;
 }
 
@@ -39,6 +36,7 @@
 }
 
 .resetButton {
+  margin-left: auto;
   padding: 0.5rem;
   background: white;
   color: black;

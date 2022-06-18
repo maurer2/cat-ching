@@ -1,38 +1,18 @@
 import React from 'react';
 
 import style from './Slider.module.scss';
+import * as Types from './Slider.types';
 
-function Entry({ children }) {
-  return (
-    <li className={style.slide}>
-      {children}
-    </li>
-  );
-}
-
-function Container({ children }) {
+function Slider({ children }: Types.SliderProps): JSX.Element {
   return (
     <ul className={style.slider}>
-      {children}
+      {React.Children.map(children, (child) => (
+        <li className={style.slide}>
+          {child}
+        </li>
+      ))}
     </ul>
   );
 }
 
-function Slider({ children }) {
-  return (
-    <Container>
-      {React.Children.map(children, (child) => (
-        <Entry>
-          {child}
-        </Entry>
-      ))}
-    </Container>
-  );
-}
-
 export default Slider;
-
-export {
-  Entry,
-  Container,
-};

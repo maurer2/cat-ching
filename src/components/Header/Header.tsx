@@ -1,21 +1,16 @@
 import React from 'react';
 
-import Money from '../../types/Money';
-
 import style from './Header.module.scss';
+import * as Types from './Header.types';
 
-function Header({ targetAmount, handleReset }) {
-  const targetValue = (targetAmount as Money).valueAsFormattedString;
-
+function Header({ targetAmount, handleReset }: Types.HeaderProps): JSX.Element {
   return (
     <header className={style.header}>
       <h1 className={style.title}>Cat-Ching</h1>
-      <div className={style.details}>
-        <dl className={style.detail}>
-          <dt className={style.detailKey}>Target amount:</dt>
-          <dd className={style.detailValue}>{targetValue}</dd>
-        </dl>
-      </div>
+      <dl className={style.detail}>
+        <dt className={style.detailKey}>Target amount:</dt>
+        <dd className={style.detailValue}>{targetAmount.valueAsFormattedString}</dd>
+      </dl>
       <button
         className={style.resetButton}
         onClick={handleReset}
