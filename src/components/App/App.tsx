@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useReducer, useMemo } from 'react';
 import shuffle from 'lodash.shuffle';
 
@@ -72,7 +71,6 @@ function App({ coinData }) {
         >
           <Slider key={targetAmount.valueAsFormattedString}>
             {coins.map((coin) => (
-
               <Coin
                 name={coin.name}
                 image={coin.image}
@@ -86,7 +84,6 @@ function App({ coinData }) {
         </form>
       </main>
       <Footer currentAmount={currentAmount} />
-      {String(overlayIsVisible)}
       {overlayIsVisible && <Overlay />}
     </div>
   );

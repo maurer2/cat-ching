@@ -52,5 +52,6 @@ module.exports = {
     'react/jsx-no-bind': 'off', // temp
     '@typescript-eslint/ban-ts-comment': 'off', // temp
     'no-restricted-exports': 'off', // https://github.com/airbnb/javascript/issues/2500
+    'react/prop-types': 0,
   },
 };

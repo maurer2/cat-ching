@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import style from './Slider.module.scss';
 
@@ -36,18 +35,4 @@ export default Slider;
 export {
   Entry,
   Container,
-};
-
-const { node } = PropTypes;
-
-Slider.propTypes = {
-  children: node.isRequired,
-};
-
-Container.propTypes = {
-  children: node.isRequired,
-};
-
-Entry.propTypes = {
-  children: node.isRequired,
 };
