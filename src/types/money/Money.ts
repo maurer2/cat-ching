@@ -33,11 +33,12 @@ export default class Money {
   private constructor(valueInFractions: bigint, name: CurrencyName, formatter?: Intl.NumberFormat) {
     this._value = valueInFractions;
     this._name = name;
-    this._formatter = formatter ?? new Intl.NumberFormat('en-GB', {
-      style: 'currency',
-      currency: 'GBP',
-      useGrouping: false, // disable thousand separator
-    });
+    this._formatter = formatter
+      ?? new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
+        useGrouping: false, // disable thousand separator
+      });
   }
 
   public add(valueToAdd: Money): Money {
@@ -46,7 +47,13 @@ export default class Money {
     return new Money(newValue, this._name, this._formatter);
   }
 
-  public get valueAsSeparateParts() {
+  public isEqualTo(valueInFractions: number): boolean {
+    const valueInFractionsAsBigInt = BigInt(valueInFractions);
+
+    return this._value === valueInFractionsAsBigInt;
+  }
+
+  public get valueAsSeparateParts(): Intl.NumberFormatPart[] {
     // todo Number.MAX_SAFE_INTEGER and Number.MIN_SAFE_INTEGER check
     const valueAsNumber = Number(this._value) / 100;
 

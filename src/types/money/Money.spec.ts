@@ -5,23 +5,23 @@ describe('Money', () => {
 
   // removed getters
   it.skip('works correctly with numbers', () => {
-    const zero = Money.fromNumber(0, 'GBP');
-    expect(typeof zero.value).toBe('bigint');
-    expect(zero.value).toBe(0n);
-    expect(typeof zero.valueAsNumber).toBe('number');
-    expect(zero.valueAsNumber).toBe(0);
+    // const zero = Money.fromNumber(0, 'GBP');
+    // expect(typeof zero.value).toBe('bigint');
+    // expect(zero.value).toBe(0n);
+    // expect(typeof zero.valueAsNumber).toBe('number');
+    // expect(zero.valueAsNumber).toBe(0);
 
-    const fiftyP = Money.fromNumber(50, 'GBP');
-    expect(typeof fiftyP.value).toBe('bigint');
-    expect(fiftyP.value).toBe(50n);
-    expect(typeof fiftyP.valueAsNumber).toBe('number');
-    expect(fiftyP.valueAsNumber).toBe(50);
+    // const fiftyP = Money.fromNumber(50, 'GBP');
+    // expect(typeof fiftyP.value).toBe('bigint');
+    // expect(fiftyP.value).toBe(50n);
+    // expect(typeof fiftyP.valueAsNumber).toBe('number');
+    // expect(fiftyP.valueAsNumber).toBe(50);
 
-    const ninetyNineP = Money.fromBigInt(99n, 'GBP');
-    expect(typeof ninetyNineP.value).toBe('bigint');
-    expect(ninetyNineP.value).toBe(99n);
-    expect(typeof ninetyNineP.valueAsNumber).toBe('number');
-    expect(ninetyNineP.valueAsNumber).toBe(99);
+    // const ninetyNineP = Money.fromBigInt(99n, 'GBP');
+    // expect(typeof ninetyNineP.value).toBe('bigint');
+    // expect(ninetyNineP.value).toBe(99n);
+    // expect(typeof ninetyNineP.valueAsNumber).toBe('number');
+    // expect(ninetyNineP.valueAsNumber).toBe(99);
   });
 
   it('formats number correctly', () => {
@@ -40,14 +40,14 @@ describe('Money', () => {
     const threeQuid = Money.fromBigInt(3_00n, 'GBP');
     expect(threeQuid.valueAsFormattedString).toBe('£3.00');
 
-    const tenner = Money.fromBigInt(10_00n, 'GBP');
-    expect(tenner.valueAsFormattedString).toBe('£10.00');
+    const aTenner = Money.fromBigInt(10_00n, 'GBP');
+    expect(aTenner.valueAsFormattedString).toBe('£10.00');
 
-    const grand = Money.fromBigInt(1000_00n, 'GBP');
-    expect(grand.valueAsFormattedString).toBe('£1000.00');
+    const aGrand = Money.fromBigInt(1000_00n, 'GBP');
+    expect(aGrand.valueAsFormattedString).toBe('£1000.00');
   });
 
-  it('adds correctly', () => {
+  it('adds values correctly', () => {
     const fiftyP = Money.fromBigInt(50n, 'GBP');
     const ninetyNineP = Money.fromBigInt(99n, 'GBP');
     expect(fiftyP.add(ninetyNineP).valueAsFormattedString).toBe('£1.49');
@@ -55,5 +55,18 @@ describe('Money', () => {
 
     const grand = Money.fromBigInt(1000_00n, 'GBP');
     expect(fiftyP.add(grand).valueAsFormattedString).toBe('£1000.50');
+  });
+
+  it('compares values correctly', () => {
+    const zero = Money.fromBigInt(0n, 'GBP');
+    const fiftyP = Money.fromBigInt(50n, 'GBP');
+    const ninetyNineP = Money.fromBigInt(99n, 'GBP');
+    const aTenner = Money.fromBigInt(10_00n, 'GBP');
+
+    expect(zero.isEqualTo(0)).toBe(true);
+    expect(fiftyP.isEqualTo(50)).toBe(true);
+    expect(ninetyNineP.isEqualTo(99)).toBe(true);
+    expect(aTenner.isEqualTo(1000)).toBe(true);
+    expect(aTenner.isEqualTo(10_00)).toBe(true);
   });
 });
