@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useId } from 'react';
-import PropTypes from 'prop-types';
+
+import Money from '../../types/Money';
 
 import style from './Coin.module.scss';
 
-function Button({ handleOnClick, id, children }) {
+function Button({ handleOnClick, children }) {
   return (
     <button
       className={style.button}
       onClick={handleOnClick}
-      id={id}
       type="button"
     >
       {children}
@@ -23,16 +24,17 @@ const calculateRelativeWidth = (width) => (width * 100) / largestWidth;
 function Coin({ name, image, amount, size, handleAmountChange }) {
   const [showHint, setShowHint] = useState<boolean>(false);
   const currentId: string = useId();
+  const targetValue = amount as Money;
 
   const width = calculateRelativeWidth(size.width).toFixed(2);
 
   function addAmount(): void {
-    handleAmountChange(amount.valueInCents);
+    handleAmountChange(targetValue);
   }
 
-  function removeAmount(): void {
-    handleAmountChange(amount.valueInCents * -1);
-  }
+  // function removeAmount(): void {
+  // handleAmountChange(targetValue * -1);
+  // }
 
   function toggleHintVisibility(): void {
     setShowHint(!showHint);
@@ -55,13 +57,8 @@ function Coin({ name, image, amount, size, handleAmountChange }) {
         />
       </label>
       <div className={style.buttonGroup}>
-        <Button
-          handleOnClick={addAmount}
-          id={currentId}
-        >
-          Add amount
-        </Button>
-        <Button handleOnClick={removeAmount}>Remove amount</Button>
+        <Button handleOnClick={addAmount}>Add amount</Button>
+
         <Button handleOnClick={toggleHintVisibility}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
       </div>
     </fieldset>
@@ -69,32 +66,3 @@ function Coin({ name, image, amount, size, handleAmountChange }) {
 }
 
 export default Coin;
-
-const { string, number, func, shape, node } = PropTypes;
-
-Coin.propTypes = {
-  name: string.isRequired,
-  amount: shape({
-    value: number.isRequired,
-    currency: string.isRequired,
-    valueInCents: number.isRequired,
-    valueFormatted: string.isRequired,
-  }).isRequired,
-  image: string.isRequired,
-  handleAmountChange: func.isRequired,
-  size: shape({
-    width: number.isRequired,
-    height: number.isRequired,
-    unit: string.isRequired,
-  }).isRequired,
-};
-
-Button.propTypes = {
-  handleOnClick: func.isRequired,
-  id: string,
-  children: node.isRequired,
-};
-
-Button.defaultProps = {
-  id: undefined,
-};

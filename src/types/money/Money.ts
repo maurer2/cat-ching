@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/lines-between-class-members */
-const currencies = {
+export const currencies = {
   GBP: '£',
   USD: '$',
 } as const;
 
-type CurrencyName = keyof typeof currencies;
+export type CurrencyName = keyof typeof currencies;
 
 export default class Money {
   private readonly _value: bigint;
@@ -16,7 +16,7 @@ export default class Money {
     valueInFractions: bigint,
     name: CurrencyName,
     formatter?: Intl.NumberFormat,
-  ) {
+  ): Money {
     return new this(valueInFractions, name, formatter);
   }
 
@@ -24,7 +24,7 @@ export default class Money {
     valueInFractions: number,
     name: CurrencyName,
     formatter?: Intl.NumberFormat,
-  ) {
+  ): Money {
     const valueAsBigInt = BigInt(valueInFractions);
 
     return new this(valueAsBigInt, name, formatter);
@@ -47,10 +47,12 @@ export default class Money {
     return new Money(newValue, this._name, this._formatter);
   }
 
-  public isEqualTo(valueInFractions: number): boolean {
-    const valueInFractionsAsBigInt = BigInt(valueInFractions);
+  public isEqualTo(secondValue: Money): boolean {
+    return this._value === secondValue._value;
+  }
 
-    return this._value === valueInFractionsAsBigInt;
+  public isNegative(): boolean {
+    return this._value < 0;
   }
 
   public get valueAsSeparateParts(): Intl.NumberFormatPart[] {
@@ -77,3 +79,5 @@ export default class Money {
     return `${integer}.${`${fraction}`.padEnd(2, '0')}`;
   }
 }
+
+export type MoneyType = typeof Money;

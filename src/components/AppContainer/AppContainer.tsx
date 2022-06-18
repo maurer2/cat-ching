@@ -1,21 +1,19 @@
 import React from 'react';
 
 import App from '../App';
+import Money from '../../types/Money';
 
 import coinData from '../../data/coins';
-import Money from '../../data/money';
 
 const getMoneyList = () => {
   const moneyList = coinData.map((entry) => {
-    const { name, value, image, size } = entry;
-
-    const moneyObject = new Money(value, 'pound');
+    const { name, image, size, value } = entry;
 
     return {
       name,
       image,
       size,
-      amount: moneyObject,
+      amount: Money.fromNumber(value, 'GBP'),
     };
   });
 

@@ -1,18 +1,18 @@
-import React, { useState, useMemo, useReducer } from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+import React, { useState, useReducer, useMemo } from 'react';
 import shuffle from 'lodash.shuffle';
 
-import Money from '../../data/money';
+import Money from '../../types/Money';
 
 import Header from '../Header';
 import Slider from '../Slider';
 import Coin from '../Coin';
-import Overlay from '../Overlay';
 import Footer from '../Footer';
+import Overlay from '../Overlay';
 
 import style from './App.module.scss';
 
-const getRandomAmount = () => {
+const getRandomAmount = (): number => {
   const integer = Math.floor(Math.random() * 10);
   const fraction = Math.floor(Math.random() * 100) + 1;
 
@@ -24,24 +24,23 @@ const getRandomAmount = () => {
 const getShuffledCoins = (arraySorted) => shuffle(arraySorted);
 
 function App({ coinData }) {
-  const [targetAmount, setTargetAmount] = useState(() => {
+  const [targetAmount, setTargetAmount] = useState<Money>(() => {
     const newAmount = getRandomAmount();
 
-    return new Money(newAmount, 'Pound');
+    return Money.fromNumber(newAmount, 'GBP');
   });
-  const [currentAmount, setCurrentAmount] = useReducer((state, action) => {
-    const newCurrentAmount = state.valueInCents + action;
+  const [currentAmount, setCurrentAmount] = useReducer((state: Money, newState: Money) => {
+    const newCurrentAmount: Money = state.add(newState);
 
-    if (newCurrentAmount <= 0) {
-      return new Money(0, 'Pound');
+    if (newCurrentAmount.isNegative()) {
+      return Money.fromNumber(0, 'GBP');
     }
 
-    return new Money(newCurrentAmount, 'Pound');
-  }, new Money(0, 'Pound'));
+    return newCurrentAmount;
+  }, Money.fromNumber(0, 'GBP'));
   const [coins, setCoins] = useState(getShuffledCoins(coinData));
   const overlayIsVisible = useMemo<boolean>(
-    // @ts-ignore
-    () => currentAmount.valueInCents === targetAmount.valueInCents,
+    () => currentAmount.isEqualTo(targetAmount),
     [currentAmount, targetAmount],
   );
 
@@ -49,12 +48,12 @@ function App({ coinData }) {
     const newAmount = getRandomAmount();
     const newCoins = getShuffledCoins(coinData);
 
-    setTargetAmount(new Money(newAmount, 'Pound'));
-    setCurrentAmount(new Money(0, 'Pound'));
+    setTargetAmount(Money.fromNumber(newAmount, 'GBP'));
+    setCurrentAmount(Money.fromNumber(0, 'GBP'));
     setCoins(newCoins);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event): void {
     event.preventDefault();
   }
 
@@ -71,8 +70,9 @@ function App({ coinData }) {
           action=""
           method=""
         >
-          <Slider key={targetAmount.valueFormatted}>
+          <Slider key={targetAmount.valueAsFormattedString}>
             {coins.map((coin) => (
+
               <Coin
                 name={coin.name}
                 image={coin.image}
@@ -86,26 +86,10 @@ function App({ coinData }) {
         </form>
       </main>
       <Footer currentAmount={currentAmount} />
+      {String(overlayIsVisible)}
       {overlayIsVisible && <Overlay />}
     </div>
   );
 }
 
 export default App;
-
-const { string, number, shape, arrayOf } = PropTypes;
-
-App.propTypes = {
-  coinData: arrayOf(
-    shape({
-      amount: shape({
-        value: number.isRequired,
-        currency: string.isRequired,
-        valueInCents: number.isRequired,
-        valueFormatted: string.isRequired,
-      }).isRequired,
-      image: string.isRequired,
-      name: string.isRequired,
-    }),
-  ).isRequired,
-};

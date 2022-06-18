@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
+import Money from '../../types/Money';
 
 import style from './Footer.module.scss';
 
 function Footer({ currentAmount }) {
   const [showCurrentAmount, setShowCurrentAmount] = useState(true);
+  const targetValue = (currentAmount as Money).valueAsFormattedString;
 
   function toggleAmountVisibility() {
     setShowCurrentAmount(!showCurrentAmount);
@@ -18,7 +21,7 @@ function Footer({ currentAmount }) {
             Current amount:
           </dt>
           <dd className={style.detailValue}>
-            {currentAmount.valueFormatted}
+            {targetValue}
           </dd>
         </dl>
       )}
@@ -34,14 +37,3 @@ function Footer({ currentAmount }) {
 }
 
 export default Footer;
-
-const { shape, number, string } = PropTypes;
-
-Footer.propTypes = {
-  currentAmount: shape({
-    value: number.isRequired,
-    currency: string.isRequired,
-    valueInCents: number.isRequired,
-    valueFormatted: string.isRequired,
-  }).isRequired,
-};
