@@ -4,10 +4,11 @@ import App from '../App';
 import Money from '../../types/Money';
 
 import coinData from '../../data/coins';
+import Coin from '../../types/Coin';
 
-const getMoneyList = () => {
-  const moneyList = coinData.map((entry) => {
-    const { name, image, size, value } = entry;
+function AppContainer() {
+  const coinList: ReadonlyArray<Coin> = coinData.map((coin) => {
+    const { name, image, size, value } = coin;
 
     return {
       name,
@@ -17,14 +18,8 @@ const getMoneyList = () => {
     };
   });
 
-  return moneyList;
-};
-
-function AppContainer() {
-  const moneyList = getMoneyList();
-
   return (
-    <App coinData={moneyList} />
+    <App coinList={coinList} />
   );
 }
 

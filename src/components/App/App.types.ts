@@ -1,14 +1,5 @@
-import Money from '../../types/Money';
+import Coin from '../../types/Coin';
 
 export type AppProps = {
-  coinData: ReadonlyArray<{
-    amount: Money;
-    image: string;
-    name: string;
-    size: {
-      width: string;
-      height: string;
-      unit: string;
-    };
-  }>;
+  coinList: ReadonlyArray<Coin>;
 };

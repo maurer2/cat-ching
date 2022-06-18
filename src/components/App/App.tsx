@@ -1,13 +1,14 @@
 import React, { useState, useReducer, useMemo } from 'react';
 import shuffle from 'lodash.shuffle';
 
-import Money from '../../types/Money';
-
 import Header from '../Header';
 import Slider from '../Slider';
 import Coin from '../Coin';
 import Footer from '../Footer';
 import Overlay from '../Overlay';
+
+import Money from '../../types/Money';
+import CoinType from '../../types/Coin';
 
 import style from './App.module.scss';
 import * as Types from './App.types';
@@ -21,9 +22,11 @@ const getRandomAmount = (): number => {
   return Number.parseInt(`${integer}.${fraction}` * 100, 10);
 };
 
-const getShuffledCoins = (arraySorted) => shuffle(arraySorted);
-
-function App({ coinData }: Types.AppProps): JSX.Element {
+function App({ coinList }: Types.AppProps): JSX.Element {
+  const [coins, setCoins] = useReducer(
+    (state: ReadonlyArray<CoinType>) => shuffle(state) as ReadonlyArray<CoinType>,
+    shuffle(coinList) as ReadonlyArray<CoinType>,
+  );
   const [targetAmount, setTargetAmount] = useState<Money>(() => {
     const newAmount = getRandomAmount();
 
@@ -38,7 +41,6 @@ function App({ coinData }: Types.AppProps): JSX.Element {
 
     return newCurrentAmount;
   }, Money.fromNumber(0, 'GBP'));
-  const [coins, setCoins] = useState<typeof coinData>(getShuffledCoins(coinData));
   const overlayIsVisible = useMemo<boolean>(
     () => currentAmount.isEqualTo(targetAmount),
     [currentAmount, targetAmount],
@@ -46,11 +48,10 @@ function App({ coinData }: Types.AppProps): JSX.Element {
 
   function resetState(): void {
     const newAmount = getRandomAmount();
-    const newCoins = getShuffledCoins(coinData);
 
     setTargetAmount(Money.fromNumber(newAmount, 'GBP'));
     setCurrentAmount(Money.fromNumber(0, 'GBP'));
-    setCoins(newCoins);
+    setCoins();
   }
 
   function handleSubmit(event): void {
