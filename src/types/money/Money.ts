@@ -30,6 +30,13 @@ export default class Money {
     return new this(valueAsBigInt, name, formatter);
   }
 
+  public static fromRandom(name: CurrencyName, formatter?: Intl.NumberFormat): Money {
+    const randomNumber: number = Math.ceil(Math.random() * (1000 - 1)) + 1;
+    const valueAsBigInt = BigInt(randomNumber);
+
+    return new this(valueAsBigInt, name, formatter);
+  }
+
   private constructor(valueInFractions: bigint, name: CurrencyName, formatter?: Intl.NumberFormat) {
     this._value = valueInFractions;
     this._name = name;

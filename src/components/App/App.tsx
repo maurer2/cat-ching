@@ -1,5 +1,5 @@
-import React, { useState, useReducer, useMemo } from 'react';
-import shuffle from 'lodash.shuffle';
+import React, { useState, useReducer, ReducerWithoutAction, Reducer } from 'react';
+import { shuffle } from 'lodash-es';
 
 import Header from '../Header';
 import Slider from '../Slider';
@@ -13,26 +13,13 @@ import CoinType from '../../types/Coin';
 import style from './App.module.scss';
 import * as Types from './App.types';
 
-const getRandomAmount = (): number => {
-  const integer = Math.floor(Math.random() * 10);
-  const fraction = Math.floor(Math.random() * 100) + 1;
-
-  // todo
-  // @ts-ignore
-  return Number.parseInt(`${integer}.${fraction}` * 100, 10);
-};
-
 function App({ coinList }: Types.AppProps): JSX.Element {
-  const [coins, setCoins] = useReducer(
-    (state: ReadonlyArray<CoinType>) => shuffle(state) as ReadonlyArray<CoinType>,
-    shuffle(coinList) as ReadonlyArray<CoinType>,
+  const [coins, setCoins] = useReducer<ReducerWithoutAction<ReadonlyArray<CoinType>>>(
+    (state) => shuffle(state),
+    shuffle(coinList),
   );
-  const [targetAmount, setTargetAmount] = useState<Money>(() => {
-    const newAmount = getRandomAmount();
-
-    return Money.fromNumber(newAmount, 'GBP');
-  });
-  const [currentAmount, setCurrentAmount] = useReducer((state: Money, newState: Money) => {
+  const [targetAmount, setTargetAmount] = useState<Money>(() => Money.fromRandom('GBP'));
+  const [currentAmount, setCurrentAmount] = useReducer<Reducer<Money, Money>>((state, newState) => {
     const newCurrentAmount: Money = state.add(newState);
 
     if (newCurrentAmount.isNegative()) {
@@ -41,15 +28,10 @@ function App({ coinList }: Types.AppProps): JSX.Element {
 
     return newCurrentAmount;
   }, Money.fromNumber(0, 'GBP'));
-  const overlayIsVisible = useMemo<boolean>(
-    () => currentAmount.isEqualTo(targetAmount),
-    [currentAmount, targetAmount],
-  );
+  const overlayIsVisible: boolean = currentAmount.isEqualTo(targetAmount);
 
   function resetState(): void {
-    const newAmount = getRandomAmount();
-
-    setTargetAmount(Money.fromNumber(newAmount, 'GBP'));
+    setTargetAmount(Money.fromRandom('GBP'));
     setCurrentAmount(Money.fromNumber(0, 'GBP'));
     setCoins();
   }
