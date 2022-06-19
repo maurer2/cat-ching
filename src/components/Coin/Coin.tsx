@@ -19,7 +19,10 @@ function Button({ handleOnClick, children }) {
 const largestWidth = 28.4;
 const calculateRelativeWidth = (width) => (width * 100) / largestWidth;
 
-function Coin({ name, image, amount, size, handleAmountChange }: Types.CoinProps): JSX.Element {
+function Coin({
+  coin: { name, image, amount, size },
+  handleAmountChange,
+}: Types.CoinProps): JSX.Element {
   const [showHint, setShowHint] = useState<boolean>(false);
   const currentId: string = useId();
 

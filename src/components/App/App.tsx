@@ -57,11 +57,8 @@ function App({ coinList }: Types.AppProps): JSX.Element {
             {coins.map((coin) => (
               <Coin
                 key={coin.name}
-                name={coin.name}
-                image={coin.image}
-                amount={coin.amount}
+                coin={coin}
                 handleAmountChange={setCurrentAmount}
-                size={coin.size}
               />
             ))}
           </Slider>
