@@ -44,8 +44,8 @@ export default [
     value: 5,
     image: '5p.png',
     size: {
-      width: 18.0,
-      height: 18.0,
+      width: 18,
+      height: 18,
       unit: 'mm',
     },
   },

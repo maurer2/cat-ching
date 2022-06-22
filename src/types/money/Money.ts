@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/lines-between-class-members */
 export const currencies = {
   GBP: '£',
   USD: '$',

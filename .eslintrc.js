@@ -6,7 +6,7 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:react-hooks/recommended',
-    // "plugin:unicorn/recommended",
+    'plugin:unicorn/recommended',
     'airbnb',
     'airbnb-typescript',
   ],
@@ -23,6 +23,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    // jsx-a11y
     'jsx-a11y/label-has-for': [
       'warn',
       {
@@ -39,6 +40,7 @@ module.exports = {
         },
       },
     ],
+    // js/ts
     'object-curly-newline': [
       'warn',
       {
@@ -49,9 +51,23 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': 'off',
-    'react/jsx-no-bind': 'off', // temp
-    '@typescript-eslint/ban-ts-comment': 'off', // temp
     'no-restricted-exports': 'off', // https://github.com/airbnb/javascript/issues/2500
+    'no-underscore-dangle': 'off',
+    // ts
+    '@typescript-eslint/lines-between-class-members': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off', // temp
+    // react
     'react/prop-types': 0,
+    'react/jsx-no-bind': 'off', // temp
+    // unicorn
+    'unicorn/filename-case': 'off',
+    'unicorn/prevent-abbreviations': [
+      'error',
+      {
+        replacements: {
+          props: false,
+        },
+      },
+    ],
   },
 };
