@@ -21,7 +21,8 @@ const calculateRelativeWidth = (width) => (width * 100) / largestWidth;
 
 function Coin({
   coin: { name, image, amount, size },
-  handleAmountChange,
+  onAddAmount,
+  onSubtractAmount,
 }: Types.CoinProps): JSX.Element {
   const [showHint, setShowHint] = useState<boolean>(false);
   const currentId: string = useId();
@@ -29,13 +30,12 @@ function Coin({
   const width = calculateRelativeWidth(size.width).toFixed(2);
 
   function addAmount(): void {
-    handleAmountChange(amount);
+    onAddAmount(amount);
   }
 
-  // todo
-  // function removeAmount(): void {
-  // handleAmountChange(targetValue * -1);
-  // }
+  function subtractAmount(): void {
+    onSubtractAmount(amount);
+  }
 
   function toggleHintVisibility(): void {
     setShowHint(!showHint);
@@ -59,7 +59,7 @@ function Coin({
       </label>
       <div className={style.buttonGroup}>
         <Button handleOnClick={addAmount}>Add amount</Button>
-
+        <Button handleOnClick={subtractAmount}>Subtract amount</Button>
         <Button handleOnClick={toggleHintVisibility}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
       </div>
     </fieldset>

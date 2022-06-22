@@ -3,5 +3,6 @@ import Coin from '../../types/Coin';
 
 export type CoinProps = {
   coin: Coin,
-  handleAmountChange: (amount: Money) => void,
+  onAddAmount: (amount: Money) => void,
+  onSubtractAmount: (amount: Money) => void,
 };

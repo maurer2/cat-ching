@@ -52,6 +52,7 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': 'off',
     'no-restricted-exports': 'off', // https://github.com/airbnb/javascript/issues/2500
+    'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     // ts
     '@typescript-eslint/lines-between-class-members': 'off',

@@ -52,6 +52,12 @@ export default class Money {
     return new Money(newValue, this._name, this._formatter);
   }
 
+  public subtract(valueToSubtract: Money): Money {
+    const newValue: bigint = this._value - valueToSubtract._value;
+
+    return new Money(newValue, this._name, this._formatter);
+  }
+
   public isEqualTo(secondValue: Money): boolean {
     return this._value === secondValue._value;
   }

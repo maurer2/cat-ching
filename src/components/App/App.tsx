@@ -1,4 +1,4 @@
-import React, { useState, useReducer, ReducerWithoutAction, Reducer } from 'react';
+import React, { useState, useReducer, ReducerWithoutAction, Reducer, FormEvent } from 'react';
 import { shuffle } from 'lodash-es';
 
 import Header from '../Header';
@@ -11,6 +11,7 @@ import Money from '../../types/Money';
 import CoinType from '../../types/Coin';
 
 import style from './App.module.scss';
+import { moneyReducer } from './App.reducers';
 import * as Types from './App.types';
 
 function App({ coinList }: Types.AppProps): JSX.Element {
@@ -19,37 +20,50 @@ function App({ coinList }: Types.AppProps): JSX.Element {
     shuffle(coinList),
   );
   const [targetAmount, setTargetAmount] = useState<Money>(() => Money.fromRandom('GBP'));
-  const [currentAmount, setCurrentAmount] = useReducer<Reducer<Money, Money>>((state, newState) => {
-    const newCurrentAmount: Money = state.add(newState);
-
-    if (newCurrentAmount.isNegative()) {
-      return Money.fromNumber(0, 'GBP');
-    }
-
-    return newCurrentAmount;
-  }, Money.fromNumber(0, 'GBP'));
+  const [currentAmount, setCurrentAmount] = useReducer<Reducer<Money, Types.ReducerAction>>(
+    moneyReducer,
+    Money.fromNumber(0, 'GBP'),
+  );
   const overlayIsVisible: boolean = currentAmount.isEqualTo(targetAmount);
 
-  function resetState(): void {
+  function handleResetState(): void {
     setTargetAmount(Money.fromRandom('GBP'));
-    setCurrentAmount(Money.fromNumber(0, 'GBP'));
+    setCurrentAmount({
+      type: 'RESET_AMOUNT',
+    });
     setCoins();
   }
 
-  function handleSubmit(event): void {
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
+    console.log(targetAmount, currentAmount);
+  }
+
+  function handleAddAmount(amount: Money): void {
+    setCurrentAmount({
+      type: 'ADD_AMOUNT',
+      payload: amount,
+    });
+  }
+
+  function handleSubtractAmount(amount: Money): void {
+    setCurrentAmount({
+      type: 'SUBTRACT_AMOUNT',
+      payload: amount,
+    });
   }
 
   return (
     <div className={style.container}>
       <Header
         targetAmount={targetAmount}
-        handleReset={resetState}
+        handleReset={handleResetState}
       />
       <main className={style.main}>
         <form
           className={style.form}
           onSubmit={handleSubmit}
+          onReset={handleResetState}
           action=""
           method=""
         >
@@ -58,7 +72,8 @@ function App({ coinList }: Types.AppProps): JSX.Element {
               <Coin
                 key={coin.name}
                 coin={coin}
-                handleAmountChange={setCurrentAmount}
+                onAddAmount={handleAddAmount}
+                onSubtractAmount={handleSubtractAmount}
               />
             ))}
           </Slider>
