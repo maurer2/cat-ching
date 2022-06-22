@@ -5,15 +5,16 @@ export type AppProps = {
   coinList: ReadonlyArray<Coin>;
 };
 
-const reducerActionNames = [
+const moneyReducerActionNames = [
   'ADD_AMOUNT',
   'SUBTRACT_AMOUNT',
   'RESET_AMOUNT',
+  'SET_RANDOM_AMOUNT',
 ] as const;
 
-export type ReducerActionNames = typeof reducerActionNames[number];
+export type MoneyReducerActionNamesType = typeof moneyReducerActionNames[number];
 
-export type ReducerAction = {
-  type: ReducerActionNames;
+export type MoneyReducerActions = {
+  type: MoneyReducerActionNamesType;
   payload?: any; // todo add conditional type
 };

@@ -1,4 +1,4 @@
-import React, { useState, useReducer, ReducerWithoutAction, Reducer, FormEvent } from 'react';
+import React, { useReducer, ReducerWithoutAction, Reducer, FormEvent } from 'react';
 import { shuffle } from 'lodash-es';
 
 import Header from '../Header';
@@ -19,38 +19,29 @@ function App({ coinList }: Types.AppProps): JSX.Element {
     (state) => shuffle(state),
     shuffle(coinList),
   );
-  const [targetAmount, setTargetAmount] = useState<Money>(() => Money.fromRandom('GBP'));
-  const [currentAmount, setCurrentAmount] = useReducer<Reducer<Money, Types.ReducerAction>>(
+  const [targetAmount, setTargetAmount] = useReducer<Reducer<Money, Types.MoneyReducerActions>>(
+    moneyReducer,
+    Money.fromRandom('GBP'),
+  );
+  const [currentAmount, setCurrentAmount] = useReducer<Reducer<Money, Types.MoneyReducerActions>>(
     moneyReducer,
     Money.fromNumber(0, 'GBP'),
   );
   const overlayIsVisible: boolean = currentAmount.isEqualTo(targetAmount);
 
   function handleResetState(): void {
-    setTargetAmount(Money.fromRandom('GBP'));
+    setTargetAmount({
+      type: 'SET_RANDOM_AMOUNT',
+    });
     setCurrentAmount({
       type: 'RESET_AMOUNT',
     });
     setCoins();
   }
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    console.log(targetAmount, currentAmount);
-  }
-
-  function handleAddAmount(amount: Money): void {
-    setCurrentAmount({
-      type: 'ADD_AMOUNT',
-      payload: amount,
-    });
-  }
-
-  function handleSubtractAmount(amount: Money): void {
-    setCurrentAmount({
-      type: 'SUBTRACT_AMOUNT',
-      payload: amount,
-    });
   }
 
   return (
@@ -72,8 +63,18 @@ function App({ coinList }: Types.AppProps): JSX.Element {
               <Coin
                 key={coin.name}
                 coin={coin}
-                onAddAmount={handleAddAmount}
-                onSubtractAmount={handleSubtractAmount}
+                onAddAmount={(amount) => {
+                  setCurrentAmount({
+                    type: 'ADD_AMOUNT',
+                    payload: amount,
+                  });
+                }}
+                onSubtractAmount={(amount) => {
+                  setCurrentAmount({
+                    type: 'SUBTRACT_AMOUNT',
+                    payload: amount,
+                  });
+                }}
               />
             ))}
           </Slider>
