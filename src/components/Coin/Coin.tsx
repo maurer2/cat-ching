@@ -1,4 +1,4 @@
-import React, { useState, useId } from 'react';
+import React, { useId, useReducer, ReducerWithoutAction, useMemo } from 'react';
 
 import style from './Coin.module.scss';
 import * as Types from './Coin.types';
@@ -15,19 +15,22 @@ function Button({ handleOnClick, children }) {
   );
 }
 
-// temp
-const largestWidth = 28.4;
-const calculateRelativeWidth = (width) => (width * 100) / largestWidth;
-
 function Coin({
-  coin: { name, image, amount, size },
+  coin: { name, image, amount, size: { width } },
   onAddAmount,
   onSubtractAmount,
 }: Types.CoinProps): JSX.Element {
-  const [showHint, setShowHint] = useState<boolean>(false);
+  const [showHint, setShowHint] = useReducer<ReducerWithoutAction<boolean>>(
+    (state) => !state,
+    false,
+  );
   const currentId: string = useId();
+  const calculatedWidth: string = useMemo(() => {
+    const largestWidth = 28.4;
+    const currenWidth = (width * 100) / largestWidth;
 
-  const width = calculateRelativeWidth(size.width).toFixed(2);
+    return currenWidth.toFixed(5);
+  }, [width]);
 
   function addAmount(): void {
     onAddAmount(amount);
@@ -37,30 +40,28 @@ function Coin({
     onSubtractAmount(amount);
   }
 
-  function toggleHintVisibility(): void {
-    setShowHint(!showHint);
-  }
-
   return (
     <fieldset className={style.container}>
       <label
         className={style.header}
         htmlFor={currentId}
       >
-        {showHint && <span className={style.title}>{name}</span>}
+        <span className={`${showHint ? style.title : style['title--hidden']}`}>
+          {name}
+        </span>
         <img
           className={style.image}
           src={`/images/${image}`}
           style={{
-            width: `${width}%`,
+            width: `${calculatedWidth}%`,
           }}
-          alt=""
+          alt="Coin"
         />
       </label>
       <div className={style.buttonGroup}>
         <Button handleOnClick={addAmount}>Add amount</Button>
         <Button handleOnClick={subtractAmount}>Subtract amount</Button>
-        <Button handleOnClick={toggleHintVisibility}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
+        <Button handleOnClick={setShowHint}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
       </div>
     </fieldset>
   );
