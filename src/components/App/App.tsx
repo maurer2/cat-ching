@@ -1,5 +1,4 @@
-import React, { useReducer, ReducerWithoutAction, Reducer, FormEvent } from 'react';
-import { shuffle } from 'lodash-es';
+import React, { useReducer, Reducer, FormEvent, useEffect } from 'react';
 
 import Header from '../Header';
 import Slider from '../Slider';
@@ -13,12 +12,11 @@ import CoinType from '../../types/Coin';
 import style from './App.module.scss';
 import { moneyReducer } from './App.reducers';
 import * as Types from './App.types';
+import useArrayShuffle from '../../hooks/useArrayShuffle';
 
 function App({ coinList }: Types.AppProps): JSX.Element {
-  const [coins, setCoins] = useReducer<ReducerWithoutAction<ReadonlyArray<CoinType>>>(
-    (state) => shuffle(state),
-    shuffle(coinList),
-  );
+  const [coins, setCoins] = useArrayShuffle<CoinType>(coinList);
+
   const [targetAmount, setTargetAmount] = useReducer<Reducer<Money, Types.MoneyReducerActions>>(
     moneyReducer,
     Money.fromRandom('GBP'),
@@ -27,6 +25,13 @@ function App({ coinList }: Types.AppProps): JSX.Element {
     moneyReducer,
     Money.fromNumber(0, 'GBP'),
   );
+  // workaround for stale targetAmount, which keeps current coin in view on reload
+  useEffect(() => {
+    setTargetAmount({
+      type: 'SET_RANDOM_AMOUNT',
+    });
+  }, []);
+
   const overlayIsVisible: boolean = currentAmount.isEqualTo(targetAmount);
 
   function handleResetState(): void {
