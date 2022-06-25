@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer, FormEvent, useEffect } from 'react';
+import React, { useReducer, Reducer, useMemo } from 'react';
 
 import Header from '../Header';
 import Slider from '../Slider';
@@ -11,81 +11,67 @@ import CoinType from '../../types/Coin';
 
 import style from './App.module.scss';
 import { moneyReducer } from './App.reducers';
-import * as Types from './App.types';
+import { MoneyReducerState, MoneyReducerAction, CoinsWithStableKeys, AppProps } from './App.types';
 import useArrayShuffle from '../../hooks/useArrayShuffle';
 
-function App({ coinList }: Types.AppProps): JSX.Element {
+function App({ coinList }: AppProps): JSX.Element {
   const [coins, setCoins] = useArrayShuffle<CoinType>(coinList);
+  const [amounts, setAmounts] = useReducer<Reducer<MoneyReducerState, MoneyReducerAction>>(moneyReducer, {
+    targetAmount: Money.fromRandom('GBP'),
+    currentAmount: Money.fromNumber(0, 'GBP'),
+  });
+  // add stable keys (until next shuffle) to work around react reusing elements on refresh
+  const coinsWithStableKeys = useMemo<CoinsWithStableKeys>(() => {
+    const randomKeySuffix = (Math.random() * 100_000).toFixed(0);
 
-  const [targetAmount, setTargetAmount] = useReducer<Reducer<Money, Types.MoneyReducerActions>>(
-    moneyReducer,
-    Money.fromRandom('GBP'),
-  );
-  const [currentAmount, setCurrentAmount] = useReducer<Reducer<Money, Types.MoneyReducerActions>>(
-    moneyReducer,
-    Money.fromNumber(0, 'GBP'),
-  );
-  // workaround for stale targetAmount, which keeps current coin in view on reload
-  useEffect(() => {
-    setTargetAmount({
-      type: 'SET_RANDOM_AMOUNT',
-    });
-  }, []);
+    const keyedCoins: CoinsWithStableKeys = coins.map((coin) => ({
+      key: `${coin.name}-${randomKeySuffix}`,
+      coin,
+    }));
 
-  const overlayIsVisible: boolean = currentAmount.isEqualTo(targetAmount);
+    return keyedCoins;
+  }, [coins]);
+  const overlayIsVisible: boolean = amounts.currentAmount.isEqualTo(amounts.targetAmount);
 
   function handleResetState(): void {
-    setTargetAmount({
-      type: 'SET_RANDOM_AMOUNT',
+    setAmounts({
+      type: 'RESET_CURRENT_AMOUNT',
     });
-    setCurrentAmount({
-      type: 'RESET_AMOUNT',
+    setAmounts({
+      type: 'SET_RANDOM_TARGET_AMOUNT',
     });
     setCoins();
-  }
-
-  // eslint-disable-next-line unicorn/consistent-function-scoping
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
   }
 
   return (
     <div className={style.container}>
       <Header
-        targetAmount={targetAmount}
+        targetAmount={amounts.targetAmount}
         handleReset={handleResetState}
       />
       <main className={style.main}>
-        <form
-          className={style.form}
-          onSubmit={handleSubmit}
-          onReset={handleResetState}
-          action=""
-          method=""
-        >
-          <Slider key={targetAmount.valueAsFormattedString}>
-            {coins.map((coin) => (
-              <Coin
-                key={coin.name}
-                coin={coin}
-                onAddAmount={(amount) => {
-                  setCurrentAmount({
-                    type: 'ADD_AMOUNT',
-                    payload: amount,
-                  });
-                }}
-                onSubtractAmount={(amount) => {
-                  setCurrentAmount({
-                    type: 'SUBTRACT_AMOUNT',
-                    payload: amount,
-                  });
-                }}
-              />
-            ))}
-          </Slider>
-        </form>
+        <Slider>
+          {coinsWithStableKeys.map(({ key, coin }) => (
+            <Coin
+              key={key}
+              coin={coin}
+              onAddAmount={(amount) => {
+                setAmounts({
+                  type: 'ADD_TO_CURRENT_AMOUNT',
+                  payload: amount,
+                });
+              }}
+              onSubtractAmount={(amount) => {
+                setAmounts({
+                  type: 'SUBTRACT_FROM_CURRENT_AMOUNT',
+                  payload: amount,
+                });
+              }}
+            />
+          ))}
+        </Slider>
       </main>
-      <Footer currentAmount={currentAmount} />
+      <Footer currentAmount={amounts.currentAmount} />
       {overlayIsVisible && <Overlay />}
     </div>
   );

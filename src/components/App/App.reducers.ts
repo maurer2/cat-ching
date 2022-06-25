@@ -1,28 +1,38 @@
 import Money from '../../types/Money';
-import * as Types from './App.types';
+import { MoneyReducerState, MoneyReducerAction } from './App.types';
 
-export const moneyReducer = (state: Money, { type, payload }: Types.MoneyReducerActions) => {
+export const moneyReducer = (state: MoneyReducerState, { type, payload }: MoneyReducerAction) => {
   switch (type) {
-    case 'ADD_AMOUNT': {
-      const amount: Money = state.add(payload);
-      return amount;
+    case 'ADD_TO_CURRENT_AMOUNT': {
+      const currentAmount: Money = state.currentAmount.add(payload);
+      return {
+        ...state,
+        currentAmount,
+      };
     }
-    case 'SUBTRACT_AMOUNT': {
-      const amount: Money = state.subtract(payload);
+    case 'SUBTRACT_FROM_CURRENT_AMOUNT': {
+      let currentAmount: Money = state.currentAmount.subtract(payload);
 
-      if (amount.isNegative()) {
-        return Money.fromNumber(0, 'GBP');
+      if (currentAmount.isNegative()) {
+        currentAmount = Money.fromNumber(0, 'GBP');
       }
 
-      return amount;
+      return {
+        ...state,
+        currentAmount,
+      };
     }
-    case 'RESET_AMOUNT': {
-      const amount: Money = Money.fromNumber(0, 'GBP');
-      return amount;
+    case 'RESET_CURRENT_AMOUNT': {
+      return {
+        ...state,
+        currentAmount: Money.fromNumber(0, 'GBP'),
+      };
     }
-    case 'SET_RANDOM_AMOUNT': {
-      const amount: Money = Money.fromRandom('GBP');
-      return amount;
+    case 'SET_RANDOM_TARGET_AMOUNT': {
+      return {
+        ...state,
+        targetAmount: Money.fromRandom('GBP'),
+      };
     }
     default: {
       return state;

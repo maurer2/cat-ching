@@ -41,6 +41,7 @@ module.exports = {
       },
     ],
     // js/ts
+    'max-len': ["error", { "code": 110 }],
     'object-curly-newline': [
       'warn',
       {
