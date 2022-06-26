@@ -6,13 +6,43 @@
   right: 0;
   display: flex;
   justify-content: center;
+  justify-content: safe center;
   align-items: center;
-  backdrop-filter: blur(10px) grayscale(100%);
+  align-items: safe center;
+  background: rgba(#ffffff, 0.75);
+
+  @supports (backdrop-filter: blur(5px) grayscale(100%)) {
+    backdrop-filter: blur(5px) grayscale(100%);
+    background: none;
+  }
+}
+.wrapper {
+  margin: 2rem;
+  padding: 2rem;
+  aspect-ratio: 5/1;
+  text-align: center;
+  background: white;
 }
 
 .overlayText {
-  margin: 0;
-  padding: 1rem;
+  margin: 0 0 2rem 0;
   font-size: 2rem;
+}
+
+.resetButton {
+  all: unset;
+  display: block;
+  margin: 0 auto;
+  padding: 0.5rem;
   background: white;
+  color: black;
+  border: 1px solid currentColor;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    background: black;
+    color: white;
+    border: 1px solid currentColor;
+  }
 }

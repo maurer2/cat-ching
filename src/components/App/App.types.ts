@@ -19,8 +19,7 @@ export type MoneyReducerState = {
 const moneyReducerActionTypes = [
   'ADD_TO_CURRENT_AMOUNT',
   'SUBTRACT_FROM_CURRENT_AMOUNT',
-  'RESET_CURRENT_AMOUNT',
-  'SET_RANDOM_TARGET_AMOUNT',
+  'RESET_STATE',
 ] as const;
 
 export type MoneyReducerActionTypes = typeof moneyReducerActionTypes[number];

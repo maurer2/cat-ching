@@ -37,12 +37,12 @@
 
 .resetButton {
   all: unset;
+  display: block;
   margin-left: auto;
   padding: 0.5rem;
   background: white;
   color: black;
   border: 1px solid currentColor;
-  border-radius: 0;
   cursor: pointer;
 
   &:hover,

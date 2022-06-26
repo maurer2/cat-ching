@@ -16,14 +16,16 @@ import useArrayShuffle from '../../hooks/useArrayShuffle';
 
 function App({ coinList }: AppProps): JSX.Element {
   const [coins, setCoins] = useArrayShuffle<CoinType>(coinList);
-  const [amounts, setAmounts] = useReducer<Reducer<MoneyReducerState, MoneyReducerAction>>(moneyReducer, {
-    targetAmount: Money.fromRandom('GBP'),
-    currentAmount: Money.fromNumber(0, 'GBP'),
-  });
+  const [amounts, setAmounts] = useReducer<Reducer<MoneyReducerState, MoneyReducerAction>>(
+    moneyReducer,
+    {
+      targetAmount: Money.fromRandom('GBP'),
+      currentAmount: Money.fromNumber(0, 'GBP'),
+    },
+  );
   // add stable keys (until next shuffle) to work around react reusing elements on refresh
   const coinsWithStableKeys = useMemo<CoinsWithStableKeys>(() => {
     const randomKeySuffix = (Math.random() * 100_000).toFixed(0);
-
     const keyedCoins: CoinsWithStableKeys = coins.map((coin) => ({
       key: `${coin.name}-${randomKeySuffix}`,
       coin,
@@ -33,12 +35,9 @@ function App({ coinList }: AppProps): JSX.Element {
   }, [coins]);
   const overlayIsVisible: boolean = amounts.currentAmount.isEqualTo(amounts.targetAmount);
 
-  function handleResetState(): void {
+  function handleReset(): void {
     setAmounts({
-      type: 'RESET_CURRENT_AMOUNT',
-    });
-    setAmounts({
-      type: 'SET_RANDOM_TARGET_AMOUNT',
+      type: 'RESET_STATE',
     });
     setCoins();
   }
@@ -47,7 +46,7 @@ function App({ coinList }: AppProps): JSX.Element {
     <div className={style.container}>
       <Header
         targetAmount={amounts.targetAmount}
-        handleReset={handleResetState}
+        onReset={handleReset}
       />
       <main className={style.main}>
         <Slider>
@@ -72,7 +71,7 @@ function App({ coinList }: AppProps): JSX.Element {
         </Slider>
       </main>
       <Footer currentAmount={amounts.currentAmount} />
-      {overlayIsVisible && <Overlay />}
+      {overlayIsVisible && <Overlay onReset={handleReset} />}
     </div>
   );
 }

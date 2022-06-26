@@ -3,7 +3,7 @@ import React from 'react';
 import style from './Header.module.scss';
 import * as Types from './Header.types';
 
-function Header({ targetAmount, handleReset }: Types.HeaderProps): JSX.Element {
+function Header({ targetAmount, onReset }: Types.HeaderProps): JSX.Element {
   return (
     <header className={style.header}>
       <h1 className={style.title}>Cat-Ching</h1>
@@ -13,7 +13,7 @@ function Header({ targetAmount, handleReset }: Types.HeaderProps): JSX.Element {
       </dl>
       <button
         className={style.resetButton}
-        onClick={handleReset}
+        onClick={onReset}
         type="button"
       >
         Reset

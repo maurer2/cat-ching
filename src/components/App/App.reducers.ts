@@ -22,16 +22,11 @@ export const moneyReducer = (state: MoneyReducerState, { type, payload }: MoneyR
         currentAmount,
       };
     }
-    case 'RESET_CURRENT_AMOUNT': {
-      return {
-        ...state,
-        currentAmount: Money.fromNumber(0, 'GBP'),
-      };
-    }
-    case 'SET_RANDOM_TARGET_AMOUNT': {
+    case 'RESET_STATE': {
       return {
         ...state,
         targetAmount: Money.fromRandom('GBP'),
+        currentAmount: Money.fromNumber(0, 'GBP'),
       };
     }
     default: {

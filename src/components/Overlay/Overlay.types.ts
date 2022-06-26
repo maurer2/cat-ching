@@ -1,1 +1,3 @@
-export type OverlayProps = Record<string, never>;
+export type OverlayProps = {
+  onReset: () => void,
+};
