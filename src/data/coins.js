@@ -10,7 +10,7 @@ export default [
     },
   },
   {
-    name: '2 Pound',
+    name: '2 Pounds',
     value: 200,
     image: '2l.png',
     size: {
@@ -30,7 +30,7 @@ export default [
     },
   },
   {
-    name: '2 Pennies',
+    name: '2 Pence',
     value: 2,
     image: '2p.png',
     size: {
@@ -40,7 +40,7 @@ export default [
     },
   },
   {
-    name: '5 Pennies',
+    name: '5 Pence',
     value: 5,
     image: '5p.png',
     size: {
@@ -50,7 +50,7 @@ export default [
     },
   },
   {
-    name: '10 Pennies',
+    name: '10 Pence',
     value: 10,
     image: '10p.png',
     size: {
@@ -60,7 +60,7 @@ export default [
     },
   },
   {
-    name: '20 Pennies',
+    name: '20 Pence',
     value: 20,
     image: '20p.png',
     size: {
@@ -70,7 +70,7 @@ export default [
     },
   },
   {
-    name: '50 Pennies',
+    name: '50 Pence',
     value: 50,
     image: '50p.png',
     size: {
