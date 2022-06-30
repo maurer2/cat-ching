@@ -6,25 +6,36 @@ export type AppProps = {
 };
 
 export type CoinsWithStableKeys = ReadonlyArray<{
-  key: string,
-  coin: Coin
+  key: string;
+  coin: Coin;
 }>;
 
 // reducer
 export type MoneyReducerState = {
-  targetAmount: Money,
-  currentAmount: Money,
+  targetAmount: Money;
+  currentAmount: Money;
 };
 
-const moneyReducerActionTypes = [
-  'ADD_TO_CURRENT_AMOUNT',
-  'SUBTRACT_FROM_CURRENT_AMOUNT',
-  'RESET_STATE',
-] as const;
-
-export type MoneyReducerActionTypes = typeof moneyReducerActionTypes[number];
+export const moneyReducerActionTypes = {
+  ADD_TO_CURRENT_AMOUNT: 'ADD_TO_CURRENT_AMOUNT',
+  SUBTRACT_FROM_CURRENT_AMOUNT: 'SUBTRACT_FROM_CURRENT_AMOUNT',
+  RESET_STATE: 'RESET_STATE',
+} as const;
+export type MoneyReducerActionType = typeof moneyReducerActionTypes;
+export type MoneyReducerActionTypesKey = MoneyReducerActionType[keyof MoneyReducerActionType];
 
 export type MoneyReducerAction = {
-  type: MoneyReducerActionTypes;
+  type: MoneyReducerActionTypesKey;
   payload?: any; // todo add conditional type
 };
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type ADD_TO_CURRENT_AMOUNT = MoneyReducerAction & {
+  payload: number;
+};
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type SUBTRACT_FROM_CURRENT_AMOUNT = MoneyReducerAction & {
+  payload: number;
+};
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type RESET_STATE = Omit<MoneyReducerAction, 'payload'>;
