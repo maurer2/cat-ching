@@ -10,32 +10,39 @@ export type CoinsWithStableKeys = ReadonlyArray<{
   coin: Coin;
 }>;
 
-// reducer
-export type MoneyReducerState = {
+// taken and adapted for union types from
+// https://www.newline.co/@bespoyasov/how-to-use-usereducer-with-typescript--3918a332
+export type State = {
   targetAmount: Money;
   currentAmount: Money;
 };
 
-export const moneyReducerActionTypes = {
+export const actionTypeValues = {
   ADD_TO_CURRENT_AMOUNT: 'ADD_TO_CURRENT_AMOUNT',
   SUBTRACT_FROM_CURRENT_AMOUNT: 'SUBTRACT_FROM_CURRENT_AMOUNT',
   RESET_STATE: 'RESET_STATE',
 } as const;
-export type MoneyReducerActionType = typeof moneyReducerActionTypes;
-export type MoneyReducerActionTypesKey = MoneyReducerActionType[keyof MoneyReducerActionType];
+export type ActionType = typeof actionTypeValues;
+export type ActionTypeKeys = ActionType[keyof ActionType];
 
-export type MoneyReducerAction = {
-  type: MoneyReducerActionTypesKey;
-  payload?: any; // todo add conditional type
+// lookup for payload types only
+type ActionPayloads = {
+  [actionTypeValues.ADD_TO_CURRENT_AMOUNT]: Money;
+  [actionTypeValues.SUBTRACT_FROM_CURRENT_AMOUNT]: Money;
+  [actionTypeValues.RESET_STATE]: never;
 };
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export type ADD_TO_CURRENT_AMOUNT = MoneyReducerAction & {
-  payload: number;
+type ActionsWithoutPayload = Extract<ActionTypeKeys, 'RESET_STATE'>;
+type ActionWithoutPayload = {
+  type: ActionsWithoutPayload;
 };
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export type SUBTRACT_FROM_CURRENT_AMOUNT = MoneyReducerAction & {
-  payload: number;
+
+type ActionWithPayload<T extends ActionTypeKeys> = {
+  // needs to also contain ActionsWithoutPayload
+  type: T;
+  payload: ActionPayloads[T];
 };
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export type RESET_STATE = Omit<MoneyReducerAction, 'payload'>;
+
+export type Actions<T extends ActionTypeKeys> = T extends ActionsWithoutPayload
+  ? ActionWithoutPayload
+  : ActionWithPayload<T>;

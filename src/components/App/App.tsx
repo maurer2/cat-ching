@@ -11,12 +11,17 @@ import CoinType from '../../types/Coin';
 
 import style from './App.module.scss';
 import { moneyReducer } from './App.reducers';
-import { MoneyReducerState, MoneyReducerAction, CoinsWithStableKeys, AppProps } from './App.types';
+import { State,
+  CoinsWithStableKeys,
+  AppProps,
+  Actions,
+  ActionTypeKeys,
+  actionTypeValues } from './App.types';
 import useArrayShuffle from '../../hooks/useArrayShuffle';
 
 function App({ coinList }: AppProps): JSX.Element {
   const [coins, setCoins] = useArrayShuffle<CoinType>(coinList);
-  const [amounts, setAmounts] = useReducer<Reducer<MoneyReducerState, MoneyReducerAction>>(
+  const [amounts, setAmounts] = useReducer<Reducer<State, Actions<ActionTypeKeys>>>(
     moneyReducer,
     {
       targetAmount: Money.fromRandom('GBP'),
@@ -37,7 +42,7 @@ function App({ coinList }: AppProps): JSX.Element {
 
   function handleReset(): void {
     setAmounts({
-      type: 'RESET_STATE',
+      type: actionTypeValues.RESET_STATE,
     });
     setCoins();
   }
@@ -56,13 +61,13 @@ function App({ coinList }: AppProps): JSX.Element {
               coin={coin}
               onAddAmount={(amount) => {
                 setAmounts({
-                  type: 'ADD_TO_CURRENT_AMOUNT',
+                  type: actionTypeValues.ADD_TO_CURRENT_AMOUNT,
                   payload: amount,
                 });
               }}
               onSubtractAmount={(amount) => {
                 setAmounts({
-                  type: 'SUBTRACT_FROM_CURRENT_AMOUNT',
+                  type: actionTypeValues.SUBTRACT_FROM_CURRENT_AMOUNT,
                   payload: amount,
                 });
               }}
