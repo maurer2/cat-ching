@@ -1,12 +1,22 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
+import sassDts from 'vite-plugin-sass-dts';
+import path from 'node:path';
 
 export default ({ mode }) => defineConfig({
   plugins: [
     react(),
     checker({
       typescript: true,
+    }),
+    sassDts({
+      enabledMode: ['development'],
+      global: {
+        generate: true,
+        // eslint-disable-next-line unicorn/prefer-module
+        outFile: path.resolve(__dirname, './src/style.d.ts'),
+      },
     }),
   ],
   define: {
