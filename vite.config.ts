@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
@@ -23,5 +24,9 @@ export default ({ mode }) => defineConfig({
   ],
   define: {
     'process.env.NODE_ENV': `"${mode}"`,
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
   },
 });

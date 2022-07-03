@@ -8,7 +8,7 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx './src'",
     "lint:fix": "npm run lint",
     "start": "vite",
-    "test": "vite test",
+    "test": "vitest useArrayShuffle.spec.ts",
     "test-types": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
@@ -19,6 +19,9 @@
     "@babel/plugin-transform-react-jsx-source": "^7.16.7",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^28.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^17.0.42",
@@ -35,6 +38,9 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-unicorn": "^42.0.0",
+    "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
+    "jest-extended": "^2.0.0",
     "lodash-es": "^4.17.21",
     "modern-normalize": "^1.1.0",
     "postcss": "^8.4.14",
@@ -43,10 +49,12 @@
     "react-dom": "^18.1.0",
     "react-test-renderer": "^18.1.0",
     "sass": "^1.53.0",
+    "ts-node": "^10.8.2",
     "typescript": "^4.7.3",
     "vite": "^2.9.13",
     "vite-plugin-checker": "^0.4.7",
     "vite-plugin-eslint": "^1.6.1",
-    "vite-plugin-sass-dts": "^1.1.35"
+    "vite-plugin-sass-dts": "^1.1.35",
+    "vitest": "^0.16.0"
   }
 }

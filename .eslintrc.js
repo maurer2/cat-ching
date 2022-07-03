@@ -59,7 +59,7 @@ module.exports = {
     '@typescript-eslint/lines-between-class-members': 'off',
     '@typescript-eslint/ban-ts-comment': 'off', // temp
     // react
-    'react/prop-types': 0,
+    'react/prop-types': 'off',
     'react/jsx-no-bind': 'off', // temp
     // unicorn
     'unicorn/filename-case': 'off',
@@ -71,5 +71,6 @@ module.exports = {
         },
       },
     ],
+    'unicorn/consistent-function-scoping': 'off',
   },
 };
