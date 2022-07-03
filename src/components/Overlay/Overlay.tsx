@@ -5,7 +5,7 @@ import * as Types from './Overlay.types';
 
 function Overlay({ onReset }: Types.OverlayProps): JSX.Element {
   return (
-    <aside className={style.overlay}>
+    <aside className={style.overlay} data-testid="overlay">
       <div className={style.wrapper}>
         <p className={style.overlayText}>
           Purrfect!

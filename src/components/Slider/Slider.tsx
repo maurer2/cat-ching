@@ -33,6 +33,7 @@ function Slider({ children }: Types.SliderProps): JSX.Element {
       className={style.slider}
       ref={scrollWrapperElement}
       onWheel={handleSegmentScrolling}
+      data-testid="slider"
     >
       {React.Children.map(children, (child) => (
         <li className={style.slide}>{child}</li>

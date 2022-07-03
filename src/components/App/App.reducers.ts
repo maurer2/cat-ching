@@ -1,5 +1,7 @@
 import Money from '../../types/Money';
-import { State, actionTypeValues, ActionTypeKeys, Actions } from './App.types';
+import {
+  State, actionTypeValues, ActionTypeKeys, Actions,
+} from './App.types';
 
 export const moneyReducer = (state: State, action: Actions<ActionTypeKeys>): State => {
   switch (action.type) {

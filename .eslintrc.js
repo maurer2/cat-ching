@@ -13,7 +13,7 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
-    jest: true,
+    jest: false,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -42,15 +42,6 @@ module.exports = {
     ],
     // js/ts
     'max-len': ["error", { "code": 110 }],
-    'object-curly-newline': [
-      'warn',
-      {
-        ObjectExpression: 'always',
-        ObjectPattern: { multiline: true },
-        ImportDeclaration: 'never',
-        ExportDeclaration: { multiline: true, minProperties: 3 },
-      },
-    ],
     'import/no-extraneous-dependencies': 'off',
     'no-restricted-exports': 'off', // https://github.com/airbnb/javascript/issues/2500
     'import/prefer-default-export': 'off',

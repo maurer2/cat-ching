@@ -5,7 +5,7 @@ import * as Types from './Header.types';
 
 function Header({ targetAmount, onReset }: Types.HeaderProps): JSX.Element {
   return (
-    <header className={style.header}>
+    <header className={style.header} data-testid="header">
       <h1 className={style.title}>Cat-Ching</h1>
       <dl className={style.detail}>
         <dt className={style.detailKey}>Target amount:</dt>

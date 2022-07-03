@@ -1,4 +1,6 @@
-import React, { useId, useReducer, ReducerWithoutAction, useMemo } from 'react';
+import React, {
+  useId, useReducer, ReducerWithoutAction, useMemo,
+} from 'react';
 
 import style from './Coin.module.scss';
 import * as Types from './Coin.types';
@@ -16,7 +18,9 @@ function Button({ handleOnClick, children }) {
 }
 
 function Coin({
-  coin: { name, image, amount, size: { width } },
+  coin: {
+    name, image, amount, size: { width },
+  },
   onAddAmount,
   onSubtractAmount,
 }: Types.CoinProps): JSX.Element {
@@ -41,7 +45,7 @@ function Coin({
   }
 
   return (
-    <fieldset className={style.container}>
+    <div className={style.container} data-testid="coin">
       <label
         className={style.header}
         htmlFor={currentId}
@@ -63,7 +67,7 @@ function Coin({
         <Button handleOnClick={subtractAmount}>Subtract amount</Button>
         <Button handleOnClick={setShowHint}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
       </div>
-    </fieldset>
+    </div>
   );
 }
 

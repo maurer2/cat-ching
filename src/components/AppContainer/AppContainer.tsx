@@ -8,7 +8,9 @@ import Coin from '../../types/Coin';
 
 function AppContainer() {
   const coinList: ReadonlyArray<Coin> = coinData.map((coin) => {
-    const { name, image, size, value } = coin;
+    const {
+      name, image, size, value,
+    } = coin;
 
     return {
       name,
@@ -19,7 +21,7 @@ function AppContainer() {
   });
 
   return (
-    <App coinList={coinList} />
+    <App coinList={coinList} data-testid="app" />
   );
 }
 

@@ -10,7 +10,7 @@ function Footer({ currentAmount }: Types.FooterProps): JSX.Element {
   );
 
   return (
-    <footer className={style.footer}>
+    <footer className={style.footer} data-testid="footer">
       {showCurrentAmount && (
         <dl className={style.detail}>
           <dt className={style.detailKey}>Current amount:</dt>

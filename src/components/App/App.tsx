@@ -11,12 +11,14 @@ import CoinType from '../../types/Coin';
 
 import style from './App.module.scss';
 import { moneyReducer } from './App.reducers';
-import { State,
+import {
+  State,
   CoinsWithStableKeys,
   AppProps,
   Actions,
   ActionTypeKeys,
-  actionTypeValues } from './App.types';
+  actionTypeValues,
+} from './App.types';
 import useArrayShuffle from '../../hooks/useArrayShuffle';
 
 function App({ coinList }: AppProps): JSX.Element {
@@ -48,7 +50,7 @@ function App({ coinList }: AppProps): JSX.Element {
   }
 
   return (
-    <div className={style.container}>
+    <div className={style.container} data-testid="app">
       <Header
         targetAmount={amounts.targetAmount}
         onReset={handleReset}
