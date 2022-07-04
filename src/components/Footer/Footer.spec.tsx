@@ -21,6 +21,12 @@ describe('AppContainer', () => {
     expect(queryByTestId('footer')).toBeInTheDocument();
   });
 
+  it('matches snapshot', () => {
+    const { container } = setup();
+
+    expect(container).toMatchSnapshot();
+  });
+
   it('has child elements', () => {
     const { getByRole } = setup();
 

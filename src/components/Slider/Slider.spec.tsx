@@ -18,6 +18,12 @@ describe('AppContainer', () => {
     expect(queryByTestId('slider')).toBeInTheDocument();
   });
 
+  it('matches snapshot', () => {
+    const { container } = setup();
+
+    expect(container).toMatchSnapshot();
+  });
+
   it('has child elements', () => {
     const { getByText } = setup();
 

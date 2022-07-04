@@ -25,6 +25,12 @@ describe('AppContainer', () => {
     expect(queryByTestId('header')).toBeInTheDocument();
   });
 
+  it('matches snapshot', () => {
+    const { container } = setup();
+
+    expect(container).toMatchSnapshot();
+  });
+
   it('has child elements', () => {
     const { getByRole } = setup();
 

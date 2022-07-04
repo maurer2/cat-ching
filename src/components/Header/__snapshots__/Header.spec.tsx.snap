@@ -1,0 +1,36 @@
+// Vitest Snapshot v1
+
+exports[`AppContainer > matches snapshot 1`] = `
+<div>
+  <header
+    class="_header_q2xj4_1"
+    data-testid="header"
+  >
+    <h1
+      class="_title_q2xj4_11"
+    >
+      Cat-Ching
+    </h1>
+    <dl
+      class="_detail_q2xj4_18"
+    >
+      <dt
+        class="_detailKey_q2xj4_28"
+      >
+        Target amount:
+      </dt>
+      <dd
+        class="_detailValue_q2xj4_32"
+      >
+        £1.11
+      </dd>
+    </dl>
+    <button
+      class="_resetButton_q2xj4_37"
+      type="button"
+    >
+      Reset
+    </button>
+  </header>
+</div>
+`;

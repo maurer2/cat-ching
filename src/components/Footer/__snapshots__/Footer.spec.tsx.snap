@@ -1,0 +1,31 @@
+// Vitest Snapshot v1
+
+exports[`AppContainer > matches snapshot 1`] = `
+<div>
+  <footer
+    class="_footer_1j6yp_1"
+    data-testid="footer"
+  >
+    <dl
+      class="_detail_1j6yp_9"
+    >
+      <dt
+        class="_detailKey_1j6yp_19"
+      >
+        Current amount:
+      </dt>
+      <dd
+        class="_detailValue_1j6yp_24"
+      >
+        £1.11
+      </dd>
+    </dl>
+    <button
+      class="_toggleButton_1j6yp_29"
+      type="button"
+    >
+      Hide current amount
+    </button>
+  </footer>
+</div>
+`;

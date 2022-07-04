@@ -1,0 +1,18 @@
+// Vitest Snapshot v1
+
+exports[`AppContainer > matches snapshot 1`] = `
+<div>
+  <ul
+    class="_slider_xf5j5_1"
+    data-testid="slider"
+  >
+    <li
+      class="_slide_xf5j5_1"
+    >
+      <div>
+        Children
+      </div>
+    </li>
+  </ul>
+</div>
+`;

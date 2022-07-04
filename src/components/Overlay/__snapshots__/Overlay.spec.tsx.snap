@@ -1,0 +1,26 @@
+// Vitest Snapshot v1
+
+exports[`AppContainer > matches snapshot 1`] = `
+<div>
+  <aside
+    class="_overlay_lnffa_1"
+    data-testid="overlay"
+  >
+    <div
+      class="_wrapper_lnffa_17"
+    >
+      <p
+        class="_overlayText_lnffa_25"
+      >
+        Purrfect!
+      </p>
+      <button
+        class="_resetButton_lnffa_30"
+        type="button"
+      >
+        Reset
+      </button>
+    </div>
+  </aside>
+</div>
+`;

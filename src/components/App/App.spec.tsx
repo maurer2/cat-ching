@@ -100,4 +100,10 @@ describe('AppContainer', () => {
 
     expect(getByTestId('app')).toBeInTheDocument();
   });
+
+  it('matches snapshot', () => {
+    const { container } = setup();
+
+    expect(container).toMatchSnapshot();
+  });
 });

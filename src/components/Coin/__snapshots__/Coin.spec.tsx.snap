@@ -1,0 +1,49 @@
+// Vitest Snapshot v1
+
+exports[`AppContainer > matches snapshot 1`] = `
+<div>
+  <div
+    class="_container_r1k0e_1"
+    data-testid="coin"
+  >
+    <label
+      class="_header_r1k0e_5"
+      for=":r1:"
+    >
+      <span
+        class="_title--hidden_r1k0e_16"
+      >
+        1 Pound
+      </span>
+      <img
+        alt="Coin"
+        class="_image_r1k0e_22"
+        src="/images/1l.png"
+        style="width: 3.52113%;"
+      />
+    </label>
+    <div
+      class="_buttonGroup_r1k0e_28"
+    >
+      <button
+        class="_button_r1k0e_28"
+        type="button"
+      >
+        Add amount
+      </button>
+      <button
+        class="_button_r1k0e_28"
+        type="button"
+      >
+        Subtract amount
+      </button>
+      <button
+        class="_button_r1k0e_28"
+        type="button"
+      >
+        Show hint
+      </button>
+    </div>
+  </div>
+</div>
+`;
