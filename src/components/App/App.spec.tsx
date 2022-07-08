@@ -6,10 +6,8 @@ import { vi } from 'vitest';
 
 import Component from './App';
 import * as Types from './App.types';
-
 import Money from '../../types/Money';
-
-// import useArrayShuffle from '../../hooks/useArrayShuffle';
+import useArrayShuffle from '../../hooks/useArrayShuffle';
 
 const mockedCoinList = [
   {
@@ -93,13 +91,16 @@ const mockedCoinList = [
     amount: Money.fromNumber(1, 'GBP'),
   },
 ];
-// vi.doMock('../../hooks/useArrayShuffle', () => ({
-//   default: vi.fn().mockReturnValue(mockedCoinList),
-// }));
+vi.mock('../../hooks/useArrayShuffle', () => ({
+  default: vi.fn(),
+}));
 
 describe('AppContainer', () => {
   beforeEach(() => {
-    vi.spyOn(global.Math, 'random').mockReturnValue(0.5);
+    // set fixed random target value
+    vi.spyOn(global.Math, 'random').mockReturnValueOnce(0.5);
+    // https://github.com/vitest-dev/vitest/issues/745
+    vi.mocked(useArrayShuffle).mockReturnValue([mockedCoinList, vi.fn()]);
   });
 
   afterEach(() => {

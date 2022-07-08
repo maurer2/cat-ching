@@ -26,7 +26,7 @@ exports[`AppContainer > matches snapshot 1`] = `
         <dd
           class="_detailValue_q2xj4_32"
         >
-          £1.68
+          £5.01
         </dd>
       </dl>
       <button
@@ -52,195 +52,7 @@ exports[`AppContainer > matches snapshot 1`] = `
           >
             <label
               class="_header_r1k0e_5"
-              for=":ro:"
-            >
-              <span
-                class="_title--hidden_r1k0e_16"
-              >
-                5 Pence
-              </span>
-              <img
-                alt="Coin"
-                class="_image_r1k0e_22"
-                src="/images/5p.png"
-                style="width: 3.52113%;"
-              />
-            </label>
-            <div
-              class="_buttonGroup_r1k0e_28"
-            >
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Add amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Subtract amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Show hint
-              </button>
-            </div>
-          </div>
-        </li>
-        <li
-          class="_slide_xf5j5_1"
-        >
-          <div
-            class="_container_r1k0e_1"
-            data-testid="coin"
-          >
-            <label
-              class="_header_r1k0e_5"
-              for=":rp:"
-            >
-              <span
-                class="_title--hidden_r1k0e_16"
-              >
-                2 Pounds
-              </span>
-              <img
-                alt="Coin"
-                class="_image_r1k0e_22"
-                src="/images/2l.png"
-                style="width: 3.52113%;"
-              />
-            </label>
-            <div
-              class="_buttonGroup_r1k0e_28"
-            >
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Add amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Subtract amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Show hint
-              </button>
-            </div>
-          </div>
-        </li>
-        <li
-          class="_slide_xf5j5_1"
-        >
-          <div
-            class="_container_r1k0e_1"
-            data-testid="coin"
-          >
-            <label
-              class="_header_r1k0e_5"
-              for=":rq:"
-            >
-              <span
-                class="_title--hidden_r1k0e_16"
-              >
-                50 Pence
-              </span>
-              <img
-                alt="Coin"
-                class="_image_r1k0e_22"
-                src="/images/50p.png"
-                style="width: 3.52113%;"
-              />
-            </label>
-            <div
-              class="_buttonGroup_r1k0e_28"
-            >
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Add amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Subtract amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Show hint
-              </button>
-            </div>
-          </div>
-        </li>
-        <li
-          class="_slide_xf5j5_1"
-        >
-          <div
-            class="_container_r1k0e_1"
-            data-testid="coin"
-          >
-            <label
-              class="_header_r1k0e_5"
-              for=":rr:"
-            >
-              <span
-                class="_title--hidden_r1k0e_16"
-              >
-                10 Pence
-              </span>
-              <img
-                alt="Coin"
-                class="_image_r1k0e_22"
-                src="/images/10p.png"
-                style="width: 3.52113%;"
-              />
-            </label>
-            <div
-              class="_buttonGroup_r1k0e_28"
-            >
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Add amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Subtract amount
-              </button>
-              <button
-                class="_button_r1k0e_28"
-                type="button"
-              >
-                Show hint
-              </button>
-            </div>
-          </div>
-        </li>
-        <li
-          class="_slide_xf5j5_1"
-        >
-          <div
-            class="_container_r1k0e_1"
-            data-testid="coin"
-          >
-            <label
-              class="_header_r1k0e_5"
-              for=":rs:"
+              for=":r8:"
             >
               <span
                 class="_title--hidden_r1k0e_16"
@@ -287,7 +99,54 @@ exports[`AppContainer > matches snapshot 1`] = `
           >
             <label
               class="_header_r1k0e_5"
-              for=":rt:"
+              for=":r9:"
+            >
+              <span
+                class="_title--hidden_r1k0e_16"
+              >
+                2 Pounds
+              </span>
+              <img
+                alt="Coin"
+                class="_image_r1k0e_22"
+                src="/images/2l.png"
+                style="width: 3.52113%;"
+              />
+            </label>
+            <div
+              class="_buttonGroup_r1k0e_28"
+            >
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Add amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Subtract amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Show hint
+              </button>
+            </div>
+          </div>
+        </li>
+        <li
+          class="_slide_xf5j5_1"
+        >
+          <div
+            class="_container_r1k0e_1"
+            data-testid="coin"
+          >
+            <label
+              class="_header_r1k0e_5"
+              for=":ra:"
             >
               <span
                 class="_title--hidden_r1k0e_16"
@@ -334,7 +193,148 @@ exports[`AppContainer > matches snapshot 1`] = `
           >
             <label
               class="_header_r1k0e_5"
-              for=":ru:"
+              for=":rb:"
+            >
+              <span
+                class="_title--hidden_r1k0e_16"
+              >
+                2 Pence
+              </span>
+              <img
+                alt="Coin"
+                class="_image_r1k0e_22"
+                src="/images/2p.png"
+                style="width: 3.52113%;"
+              />
+            </label>
+            <div
+              class="_buttonGroup_r1k0e_28"
+            >
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Add amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Subtract amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Show hint
+              </button>
+            </div>
+          </div>
+        </li>
+        <li
+          class="_slide_xf5j5_1"
+        >
+          <div
+            class="_container_r1k0e_1"
+            data-testid="coin"
+          >
+            <label
+              class="_header_r1k0e_5"
+              for=":rc:"
+            >
+              <span
+                class="_title--hidden_r1k0e_16"
+              >
+                5 Pence
+              </span>
+              <img
+                alt="Coin"
+                class="_image_r1k0e_22"
+                src="/images/5p.png"
+                style="width: 3.52113%;"
+              />
+            </label>
+            <div
+              class="_buttonGroup_r1k0e_28"
+            >
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Add amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Subtract amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Show hint
+              </button>
+            </div>
+          </div>
+        </li>
+        <li
+          class="_slide_xf5j5_1"
+        >
+          <div
+            class="_container_r1k0e_1"
+            data-testid="coin"
+          >
+            <label
+              class="_header_r1k0e_5"
+              for=":rd:"
+            >
+              <span
+                class="_title--hidden_r1k0e_16"
+              >
+                10 Pence
+              </span>
+              <img
+                alt="Coin"
+                class="_image_r1k0e_22"
+                src="/images/10p.png"
+                style="width: 3.52113%;"
+              />
+            </label>
+            <div
+              class="_buttonGroup_r1k0e_28"
+            >
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Add amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Subtract amount
+              </button>
+              <button
+                class="_button_r1k0e_28"
+                type="button"
+              >
+                Show hint
+              </button>
+            </div>
+          </div>
+        </li>
+        <li
+          class="_slide_xf5j5_1"
+        >
+          <div
+            class="_container_r1k0e_1"
+            data-testid="coin"
+          >
+            <label
+              class="_header_r1k0e_5"
+              for=":re:"
             >
               <span
                 class="_title--hidden_r1k0e_16"
@@ -381,17 +381,17 @@ exports[`AppContainer > matches snapshot 1`] = `
           >
             <label
               class="_header_r1k0e_5"
-              for=":rv:"
+              for=":rf:"
             >
               <span
                 class="_title--hidden_r1k0e_16"
               >
-                2 Pence
+                50 Pence
               </span>
               <img
                 alt="Coin"
                 class="_image_r1k0e_22"
-                src="/images/2p.png"
+                src="/images/50p.png"
                 style="width: 3.52113%;"
               />
             </label>
