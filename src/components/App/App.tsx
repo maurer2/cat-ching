@@ -1,4 +1,6 @@
-import React, { useReducer, Reducer, useMemo } from 'react';
+import React, {
+  useReducer, Reducer, useMemo, useCallback,
+} from 'react';
 
 import Header from '../Header';
 import Slider from '../Slider';
@@ -42,12 +44,12 @@ function App({ coinList }: AppProps): JSX.Element {
   }, [coins]);
   const overlayIsVisible: boolean = amounts.currentAmount.isEqualTo(amounts.targetAmount);
 
-  function handleReset(): void {
+  const handleReset = useCallback((): void => {
     setAmounts({
       type: actionTypeValues.RESET_STATE,
     });
     setCoins();
-  }
+  }, [setCoins]);
 
   return (
     <div className={style.container} data-testid="app">

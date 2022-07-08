@@ -1,5 +1,3 @@
-/* eslint-disable no-var */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { render } from '@testing-library/react';
 import { vi } from 'vitest';

@@ -1,5 +1,5 @@
 import React, {
-  useId, useReducer, ReducerWithoutAction, useMemo,
+  useId, useReducer, ReducerWithoutAction, useMemo, useCallback,
 } from 'react';
 
 import style from './Coin.module.scss';
@@ -36,13 +36,13 @@ function Coin({
     return currenWidth.toFixed(5);
   }, [width]);
 
-  function addAmount(): void {
+  const addAmount = useCallback(() => {
     onAddAmount(amount);
-  }
+  }, [onAddAmount, amount]);
 
-  function subtractAmount(): void {
+  const subtractAmount = useCallback(() => {
     onSubtractAmount(amount);
-  }
+  }, [onSubtractAmount, amount]);
 
   return (
     <div className={style.container} data-testid="coin">
