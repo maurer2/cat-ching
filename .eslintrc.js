@@ -51,6 +51,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off', // temp
     // react
     'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
     // unicorn
     'unicorn/filename-case': 'off',
     'unicorn/prevent-abbreviations': [
