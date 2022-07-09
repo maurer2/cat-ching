@@ -32,6 +32,7 @@ export default ({ mode }) => defineConfig({
     environment: 'jsdom',
     setupFiles: 'src/setupTests.ts',
     clearMocks: true,
+    // exclude: ['**/*.native.spec.tsx'],
     coverage: {
       reporter: ['text', 'lcov'],
       exclude: [
