@@ -34,7 +34,13 @@ export default ({ mode }) => defineConfig({
     clearMocks: true,
     coverage: {
       reporter: ['text', 'lcov'],
-      exclude: ['**/*.spec.tsx', '**/*.spec.ts'],
+      exclude: [
+        '**/*.spec.tsx',
+        '**/*.spec.ts',
+        '**/*.types.ts',
+        '**/*.styles.ts',
+        '**/setupTests.ts',
+      ],
     },
   },
 });

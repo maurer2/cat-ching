@@ -1,9 +1,8 @@
-import Money from '../../types/Money';
-import {
-  State, actionTypeValues, ActionTypeKeys, Actions,
-} from './App.types';
+import Money from '../../../types/Money';
+import type { State, ActionTypeKeys, Actions } from './money.reducers.types';
+import { actionTypeValues } from './money.reducers.types';
 
-export const moneyReducer = (state: State, action: Actions<ActionTypeKeys>): State => {
+const moneyReducers = (state: State, action: Actions<ActionTypeKeys>): State => {
   switch (action.type) {
     case actionTypeValues.ADD_TO_CURRENT_AMOUNT: {
       const currentAmount: Money = state.currentAmount.add(action.payload);
@@ -38,3 +37,5 @@ export const moneyReducer = (state: State, action: Actions<ActionTypeKeys>): Sta
     }
   }
 };
+
+export default moneyReducers;

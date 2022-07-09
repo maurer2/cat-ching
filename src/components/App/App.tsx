@@ -12,26 +12,18 @@ import Money from '../../types/Money';
 import CoinType from '../../types/Coin';
 
 import style from './App.module.scss';
-import { moneyReducer } from './App.reducers';
-import {
-  State,
-  CoinsWithStableKeys,
-  AppProps,
-  Actions,
-  ActionTypeKeys,
-  actionTypeValues,
-} from './App.types';
+import moneyReducers from './moneyReducers';
+import type { CoinsWithStableKeys, AppProps } from './App.types';
+import type { State, Actions, ActionTypeKeys } from './moneyReducers/money.reducers.types';
+import { actionTypeValues } from './moneyReducers/money.reducers.types';
 import useArrayShuffle from '../../hooks/useArrayShuffle';
 
 function App({ coinList }: AppProps): JSX.Element {
   const [coins, setCoins] = useArrayShuffle<CoinType>(coinList);
-  const [amounts, setAmounts] = useReducer<Reducer<State, Actions<ActionTypeKeys>>>(
-    moneyReducer,
-    {
-      targetAmount: Money.fromRandom('GBP'),
-      currentAmount: Money.fromNumber(0, 'GBP'),
-    },
-  );
+  const [amounts, setAmounts] = useReducer<Reducer<State, Actions<ActionTypeKeys>>>(moneyReducers, {
+    targetAmount: Money.fromRandom('GBP'),
+    currentAmount: Money.fromNumber(0, 'GBP'),
+  });
   // add stable keys (until next shuffle) to work around react reusing elements on refresh
   const coinsWithStableKeys = useMemo<CoinsWithStableKeys>(() => {
     const randomKeySuffix = (Math.random() * 100_000).toFixed(0);
@@ -52,7 +44,10 @@ function App({ coinList }: AppProps): JSX.Element {
   }, [setCoins]);
 
   return (
-    <div className={style.container} data-testid="app">
+    <div
+      className={style.container}
+      data-testid="app"
+    >
       <Header
         targetAmount={amounts.targetAmount}
         onReset={handleReset}

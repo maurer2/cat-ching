@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { vi } from 'vitest';
 
 import Component from './App';
 import * as Types from './App.types';
