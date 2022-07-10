@@ -1,20 +1,16 @@
 import globalClassNames, { ClassNames as GlobalClassNames } from '../..style.d';
 declare const classNames: typeof globalClassNames & {
   readonly 'container': 'container';
-  readonly 'header': 'header';
-  readonly 'title': 'title';
-  readonly 'title--hidden': 'title--hidden';
-  readonly 'image': 'image';
-  readonly 'buttonGroup': 'buttonGroup';
   readonly 'button': 'button';
+  readonly 'image-wrapper': 'image-wrapper';
+  readonly 'image': 'image';
+  readonly 'title': 'title';
 };
 export default classNames;
 export type ClassNames =
   | 'container'
-  | 'header'
-  | 'title'
-  | 'title--hidden'
-  | 'image'
-  | 'buttonGroup'
   | 'button'
+  | 'image-wrapper'
+  | 'image'
+  | 'title'
   | GlobalClassNames;

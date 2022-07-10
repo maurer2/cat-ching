@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   useId, useReducer, ReducerWithoutAction, useMemo, useCallback,
 } from 'react';
@@ -44,29 +45,32 @@ function Coin({
     onSubtractAmount(amount);
   }, [onSubtractAmount, amount]);
 
+  const toggleActiveState = useCallback(() => {
+    console.log(amount);
+  }, [amount]);
+
   return (
     <div className={style.container} data-testid="coin">
-      <label
-        className={style.header}
-        htmlFor={currentId}
+      <span hidden>is active</span>
+      <button
+        type="button"
+        className={style.button}
+        onClick={toggleActiveState}
       >
-        <span className={`${showHint ? style.title : style['title--hidden']}`}>
-          {name}
-        </span>
-        <img
-          className={style.image}
-          src={`/images/${image}`}
-          style={{
-            width: `${calculatedWidth}%`,
-          }}
-          alt="Coin"
-        />
-      </label>
-      <div className={style.buttonGroup}>
-        <Button handleOnClick={addAmount}>Add amount</Button>
-        <Button handleOnClick={subtractAmount}>Subtract amount</Button>
-        <Button handleOnClick={setShowHint}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
-      </div>
+        <figure className={style['image-wrapper']}>
+          <img
+            className={style.image}
+            src={`/images/${image}`}
+            style={{
+              width: `${calculatedWidth}%`,
+            }}
+            alt="Coin"
+          />
+          <figcaption className={style.title}>
+            {name}
+          </figcaption>
+        </figure>
+      </button>
     </div>
   );
 }
