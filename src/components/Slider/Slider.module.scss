@@ -1,12 +1,13 @@
 .slider {
-  display: flex;
-  flex-grow: 1;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(450px, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
   overflow-y: scroll;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: y mandatory;
   overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
 }
 
 .slide {
@@ -15,7 +16,7 @@
   min-width: 100%;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 
   &:nth-child(odd) {
     background: whitesmoke;

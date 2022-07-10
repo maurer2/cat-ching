@@ -1,13 +1,17 @@
 .container {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  min-height: 100vh;
+  display: grid;
+  grid-template-rows:
+    auto
+    1fr
+    auto
+  ;
+  height: 100vh;
 }
 
 .main {
-  display: flex;
-  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
   background: white;
-  color: black;
+  overflow: hidden;
+  // scrollbar-gutter: stable both-edges;
 }

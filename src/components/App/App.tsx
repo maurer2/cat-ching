@@ -7,6 +7,7 @@ import Slider from '../Slider';
 import Coin from '../Coin';
 import Footer from '../Footer';
 import Overlay from '../Overlay';
+import Controls from '../Controls';
 
 import Money from '../../types/Money';
 import CoinType from '../../types/Coin';
@@ -73,6 +74,7 @@ function App({ coinList }: AppProps): JSX.Element {
             />
           ))}
         </Slider>
+        <Controls onAddAmount={() => {}} onSubtractAmount={() => {}} />
       </main>
       <Footer currentAmount={amounts.currentAmount} />
       {overlayIsVisible && <Overlay onReset={handleReset} />}
