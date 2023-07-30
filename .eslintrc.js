@@ -24,14 +24,6 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     // jsx-a11y
-    'jsx-a11y/label-has-for': [
-      'warn',
-      {
-        required: {
-          some: ['nesting', 'id'],
-        },
-      },
-    ],
     'jsx-a11y/label-has-associated-control': [
       'warn',
       {

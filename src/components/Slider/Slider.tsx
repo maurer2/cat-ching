@@ -1,4 +1,4 @@
-import React, { useRef, WheelEvent } from 'react';
+import React, { useRef, WheelEvent, Children } from 'react';
 
 import style from './Slider.module.scss';
 import * as Types from './Slider.types';
@@ -35,7 +35,7 @@ function Slider({ children }: Types.SliderProps): JSX.Element {
       onWheel={handleSegmentScrolling}
       data-testid="slider"
     >
-      {React.Children.map(children, (child) => (
+      {Children.map(children, (child) => (
         <li className={style.slide}>{child}</li>
       ))}
     </ul>

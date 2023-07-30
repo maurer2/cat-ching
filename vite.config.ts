@@ -18,8 +18,7 @@ export default ({ mode }) => defineConfig({
       enabledMode: ['development'],
       global: {
         generate: true,
-        // eslint-disable-next-line unicorn/prefer-module
-        outFile: path.resolve(__dirname, './src/style.d.ts'),
+        outputFilePath: path.resolve(__dirname, './src/style.d.ts'),
       },
     }),
     legacy(),
