@@ -1,4 +1,5 @@
 import React, { useReducer, ReducerWithoutAction } from 'react';
+import clsx from 'clsx';
 
 import style from './Footer.module.scss';
 import * as Types from './Footer.types';
@@ -22,7 +23,18 @@ function Footer({ currentAmount }: Types.FooterProps): JSX.Element {
         onClick={toggleShowCurrentAmount}
         type="button"
       >
-        {showCurrentAmount ? 'Hide current amount' : 'Show current amount'}
+        <span
+          className={clsx({ [style['hidden-text']]: !showCurrentAmount })}
+          aria-hidden={!showCurrentAmount}
+        >
+          Hide current amount
+        </span>
+        <span
+          className={clsx({ [style['hidden-text']]: showCurrentAmount })}
+          aria-hidden={showCurrentAmount}
+        >
+          Show current amount
+        </span>
       </button>
     </footer>
   );

@@ -7,5 +7,6 @@ declare const classNames: typeof globalClassNames & {
   readonly 'image': 'image';
   readonly 'buttonGroup': 'buttonGroup';
   readonly 'button': 'button';
+  readonly 'hidden-text': 'hidden-text';
 };
 export = classNames;

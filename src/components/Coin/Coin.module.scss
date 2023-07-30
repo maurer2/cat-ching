@@ -33,17 +33,29 @@
 
 .button {
   all: unset;
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem;
   background: white;
   color: black;
   border: 1px solid currentColor;
   border-radius: 0;
   cursor: pointer;
+  text-align: center;
 
   &:hover,
   &:active {
     background: black;
     color: white;
     border: 1px solid black;
+  }
+
+  &:active {
+    border: 1px solid white;
+  }
+
+  > .hidden-text {
+    overflow: hidden;
+    height: 0;
   }
 }

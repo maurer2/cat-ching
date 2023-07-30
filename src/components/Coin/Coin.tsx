@@ -1,6 +1,7 @@
 import React, {
   useId, useReducer, ReducerWithoutAction, useMemo, useCallback,
 } from 'react';
+import clsx from 'clsx';
 
 import style from './Coin.module.scss';
 import * as Types from './Coin.types';
@@ -17,6 +18,8 @@ function Button({ handleOnClick, children }) {
   );
 }
 
+const largestWidth = 28.4;
+
 function Coin({
   coin: {
     name, image, amount, size: { width },
@@ -30,7 +33,6 @@ function Coin({
   );
   const currentId: string = useId();
   const calculatedWidth: string = useMemo(() => {
-    const largestWidth = 28.4;
     const currenWidth = (width * 100) / largestWidth;
 
     return currenWidth.toFixed(5);
@@ -65,7 +67,20 @@ function Coin({
       <div className={style.buttonGroup}>
         <Button handleOnClick={addAmount}>Add amount</Button>
         <Button handleOnClick={subtractAmount}>Subtract amount</Button>
-        <Button handleOnClick={setShowHint}>{showHint ? 'Hide hint' : 'Show hint'}</Button>
+        <Button handleOnClick={setShowHint}>
+          <span
+            className={clsx({ [style['hidden-text']]: !showHint })}
+            aria-hidden={!showHint}
+          >
+            Hide hint
+          </span>
+          <span
+            className={clsx({ [style['hidden-text']]: showHint })}
+            aria-hidden={showHint}
+          >
+            Show hint
+          </span>
+        </Button>
       </div>
     </div>
   );

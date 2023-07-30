@@ -44,11 +44,14 @@
   color: black;
   border: 1px solid currentColor;
   cursor: pointer;
+  border-radius: 0;
 
   &:hover,
   &:active {
-    background: black;
-    color: white;
-    border: 1px solid currentColor;
+    border: 1px solid black;
+  }
+
+  &:active {
+    border: 1px solid white;
   }
 }
