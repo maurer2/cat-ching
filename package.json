@@ -10,7 +10,8 @@
     "start": "vite",
     "test": "vitest --coverage",
     "test-native": "ts-node ./src/components/App/moneyReducers/money.reducers.spek.tsx",
-    "test-types": "tsc --noEmit --skipLibCheck"
+    "test-types": "tsc --noEmit --skipLibCheck",
+    "test-schema": "vitest 'coins.spec.ts'"
   },
   "dependencies": {
     "@cypress/react": "^6.2.1",
