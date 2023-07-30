@@ -1,5 +1,5 @@
 import React, {
-  useId, useReducer, ReducerWithoutAction, useMemo, useCallback,
+  useReducer, ReducerWithoutAction, useMemo, useCallback,
 } from 'react';
 import clsx from 'clsx';
 
@@ -31,7 +31,6 @@ function Coin({
     (state) => !state,
     false,
   );
-  const currentId: string = useId();
   const calculatedWidth: string = useMemo(() => {
     const currenWidth = (width * 100) / largestWidth;
 
@@ -48,13 +47,10 @@ function Coin({
 
   return (
     <div className={style.container} data-testid="coin">
-      <label
-        className={style.header}
-        htmlFor={currentId}
-      >
-        <span className={`${showHint ? style.title : style['title--hidden']}`}>
+      <figure className={style['image-container']}>
+        <figcaption className={`${showHint ? style.title : style['title--hidden']}`}>
           {name}
-        </span>
+        </figcaption>
         <img
           className={style.image}
           src={`/images/${image}`}
@@ -63,8 +59,8 @@ function Coin({
           }}
           alt="Coin"
         />
-      </label>
-      <div className={style.buttonGroup}>
+      </figure>
+      <div className={style['button-group']}>
         <Button handleOnClick={addAmount}>Add amount</Button>
         <Button handleOnClick={subtractAmount}>Subtract amount</Button>
         <Button handleOnClick={setShowHint}>

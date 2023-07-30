@@ -2,9 +2,10 @@
   margin: 0;
 }
 
-.header {
+.image-container {
   display: flex;
   flex-direction: column;
+  margin: 0;
   text-align: center;
 }
 
@@ -25,7 +26,7 @@
   object-fit: contain;
 }
 
-.buttonGroup {
+.button-group {
   display: flex;
   gap: 0.5rem;
   justify-content: space-evenly;
