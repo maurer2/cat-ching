@@ -47,7 +47,36 @@ describe('coins', () => {
     }).not.toThrowError();
   });
 
-  it('coin list - duplicates', () => {
+  it('coin list - duplicate values', () => {
+    const data = [
+      {
+        name: '1 Pound',
+        value: 100,
+        image: '1l.png',
+        size: {
+          width: 23.3,
+          height: 23.43,
+          unit: 'mm',
+        },
+      },
+      {
+        name: '1 Pound',
+        value: 100,
+        image: '1l.png',
+        size: {
+          width: 23.3,
+          height: 23.43,
+          unit: 'mm',
+        },
+      },
+    ];
+
+    expect(() => {
+      coinListSchema.parse(data);
+    }).toThrowError();
+  });
+
+  it('coin list - mixed size units', () => {
     const data = [
       {
         name: '1 Pound',
@@ -61,12 +90,12 @@ describe('coins', () => {
       },
       {
         name: '2 Pounds',
-        value: 100,
+        value: 200,
         image: '2l.png',
         size: {
-          width: 28.4,
-          height: 28.4,
-          unit: 'mm',
+          width: 2.84,
+          height: 2.84,
+          unit: 'cm',
         },
       },
     ];

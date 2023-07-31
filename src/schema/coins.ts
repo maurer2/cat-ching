@@ -17,8 +17,7 @@ export const coinSchema = z
 
 export const coinListSchema = z
   .array(coinSchema)
-  // uniqueness
-  // https://github.com/colinhacks/zod/discussions/2316
+  // uniqueness - https://github.com/colinhacks/zod/discussions/2316
   .refine(
     (coins): boolean => {
       const values = coins.map(({ value }) => value);
@@ -26,5 +25,15 @@ export const coinListSchema = z
     },
     {
       message: 'Duplicate coin values detected',
+    },
+  )
+  // no mixed units
+  .refine(
+    (coins): boolean => {
+      const units = coins.map(({ size }) => size.unit);
+      return new Set(units).size === 1;
+    },
+    {
+      message: 'Size units must not be mixed',
     },
   );
