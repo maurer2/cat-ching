@@ -1,11 +1,11 @@
 /// <reference types="vitest" />
+import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
 import sassDts from 'vite-plugin-sass-dts';
 import eslint from 'vite-plugin-eslint';
 import legacy from '@vitejs/plugin-legacy';
-import path from 'node:path';
 
 export default ({ mode }) => defineConfig({
   plugins: [
@@ -18,6 +18,7 @@ export default ({ mode }) => defineConfig({
       enabledMode: ['development'],
       global: {
         generate: true,
+        // eslint-disable-next-line unicorn/prefer-module
         outputFilePath: path.resolve(__dirname, './src/style.d.ts'),
       },
     }),
