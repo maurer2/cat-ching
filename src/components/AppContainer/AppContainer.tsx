@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { initClient } from '@ts-rest/core';
 import { contract } from '../../../server/contract';
 
@@ -8,18 +8,22 @@ import Money from '../../types/Money';
 import coinData from '../../data/coins';
 import Coin from '../../types/Coin';
 
-function AppContainer() {
-  const client = initClient(contract, {
-    baseUrl: 'http://localhost:3333',
-    baseHeaders: {},
-  });
+const port = import.meta.env.VITE_SERVER_PORT;
 
-  client.getCoins({})
-    .then(({ body, status }) => {
-      if (status === 200 && body !== null) {
-        console.log(body);
-      }
+function AppContainer() {
+  useEffect(() => {
+    const client = initClient(contract, {
+      baseUrl: `http://localhost:${port}`,
+      baseHeaders: {},
     });
+
+    client.getCoins({})
+      .then(({ body, status }) => {
+        if (status === 200 && body !== null) {
+          console.log(body);
+        }
+      });
+  }, []);
 
   const coinList: ReadonlyArray<Coin> = coinData.map((coin) => {
     const {

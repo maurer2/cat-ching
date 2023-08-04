@@ -3,10 +3,12 @@ import cors from 'cors';
 import { initServer, createExpressEndpoints } from '@ts-rest/express';
 import { z } from 'zod';
 import { contract } from './contract';
+import 'dotenv/config';
 
 type Coin = z.infer<typeof contract.getCoin.responses[200]>;
 type CoinList = z.infer<typeof contract.getCoins.responses[200]>;
 
+const port = process.env.VITE_SERVER_PORT;
 const app = express();
 
 app.use(express.json());
@@ -66,7 +68,6 @@ const router = s.router(contract, {
 
 createExpressEndpoints(contract, router, app);
 
-const port = process.env.port || 3333;
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
