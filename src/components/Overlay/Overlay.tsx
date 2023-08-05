@@ -1,7 +1,7 @@
 import React from 'react';
 
 import style from './Overlay.module.scss';
-import * as Types from './Overlay.types';
+import type * as Types from './Overlay.types';
 
 function Overlay({ onReset }: Types.OverlayProps): JSX.Element {
   return (

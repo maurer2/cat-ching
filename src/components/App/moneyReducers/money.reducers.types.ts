@@ -1,4 +1,4 @@
-import Money from '../../../types/Money';
+import type Money from '../../../types/Money';
 
 // taken and adapted for union types from
 // https://www.newline.co/@bespoyasov/how-to-use-usereducer-with-typescript--3918a332

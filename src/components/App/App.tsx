@@ -1,5 +1,6 @@
+import type { Reducer } from 'react';
 import React, {
-  useReducer, Reducer, useMemo, useCallback,
+  useReducer, useMemo, useCallback,
 } from 'react';
 
 import Header from '../Header';

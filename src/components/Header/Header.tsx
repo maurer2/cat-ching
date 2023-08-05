@@ -1,7 +1,7 @@
 import React from 'react';
 
 import style from './Header.module.scss';
-import * as Types from './Header.types';
+import type * as Types from './Header.types';
 
 function Header({ targetAmount, onReset }: Types.HeaderProps): JSX.Element {
   return (

@@ -1,8 +1,9 @@
-import React, { useReducer, ReducerWithoutAction } from 'react';
+import type { ReducerWithoutAction } from 'react';
+import React, { useReducer } from 'react';
 import clsx from 'clsx';
 
 import style from './Footer.module.scss';
-import * as Types from './Footer.types';
+import type * as Types from './Footer.types';
 
 function Footer({ currentAmount }: Types.FooterProps): JSX.Element {
   const [showCurrentAmount, toggleShowCurrentAmount] = useReducer<ReducerWithoutAction<boolean>>(

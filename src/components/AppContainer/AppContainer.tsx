@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { initClient } from '@ts-rest/core';
-import { contract } from '../../../server/contract';
 
+import { contract } from '../../../server/contract';
 import App from '../App';
 import Money from '../../types/Money';
 import coinData from '../../data/coins';

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import Component from './App';
-import * as Types from './App.types';
+import type * as Types from './App.types';
 import Money from '../../types/Money';
 import useArrayShuffle from '../../hooks/useArrayShuffle';
 

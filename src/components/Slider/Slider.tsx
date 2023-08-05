@@ -1,7 +1,8 @@
-import React, { useRef, WheelEvent, Children } from 'react';
+import type { WheelEvent } from 'react';
+import React, { useRef, Children } from 'react';
 
 import style from './Slider.module.scss';
-import * as Types from './Slider.types';
+import type * as Types from './Slider.types';
 
 function Slider({ children }: Types.SliderProps): JSX.Element {
   const scrollWrapperElement = useRef<HTMLUListElement | null>(null);

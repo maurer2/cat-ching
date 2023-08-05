@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 
-import { coinSchema } from '../../schema/coins';
+import type { coinSchema } from '../../schema/coins';
 import type Money from '../Money';
 
 // type WithCoinData<T extends object> = T & {

@@ -41,6 +41,7 @@ module.exports = {
     // ts
     '@typescript-eslint/lines-between-class-members': 'off',
     '@typescript-eslint/ban-ts-comment': 'off', // temp
+    '@typescript-eslint/consistent-type-imports': 'warn',
     // react
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',

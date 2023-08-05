@@ -1,10 +1,11 @@
+import type { ReducerWithoutAction } from 'react';
 import React, {
-  useReducer, ReducerWithoutAction, useMemo, useCallback,
+  useReducer, useMemo, useCallback,
 } from 'react';
 import clsx from 'clsx';
 
 import style from './Coin.module.scss';
-import * as Types from './Coin.types';
+import type * as Types from './Coin.types';
 
 function Button({ handleOnClick, children }) {
   return (
