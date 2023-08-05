@@ -1,4 +1,4 @@
-export default [
+const coins = [
   {
     name: '1 Pound',
     value: 100,
@@ -79,4 +79,6 @@ export default [
       unit: 'mm',
     },
   },
-];
+] as const;
+
+export default coins;

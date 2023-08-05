@@ -87,7 +87,7 @@ const mockedCoinList = [
     },
     amount: Money.fromNumber(1, 'GBP'),
   },
-];
+] as const;
 vi.mock('../../hooks/useArrayShuffle', () => ({
   default: vi.fn(),
 }));

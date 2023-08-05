@@ -1,1 +1,1 @@
-export { default } from './Coin';
+export type { CoinData, Coin } from './Coin';

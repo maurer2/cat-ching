@@ -4,9 +4,8 @@ import { contract } from '../../../server/contract';
 
 import App from '../App';
 import Money from '../../types/Money';
-
 import coinData from '../../data/coins';
-import Coin from '../../types/Coin';
+import type { Coin } from '../../types/Coin';
 
 const port = import.meta.env.VITE_SERVER_PORT;
 
@@ -27,7 +26,10 @@ function AppContainer() {
 
   const coinList: ReadonlyArray<Coin> = coinData.map((coin) => {
     const {
-      name, image, size, value,
+      name,
+      image,
+      size,
+      value,
     } = coin;
 
     return {

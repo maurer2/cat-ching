@@ -1,12 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import { initServer, createExpressEndpoints } from '@ts-rest/express';
-import { z } from 'zod';
-import { contract } from './contract';
 import 'dotenv/config';
 
-type Coin = z.infer<typeof contract.getCoin.responses[200]>;
-type CoinList = z.infer<typeof contract.getCoins.responses[200]>;
+import { contract } from './contract';
+import type { CoinData } from '../src/types/Coin';
+import coins from '../src/data/coins';
 
 const port = process.env.VITE_SERVER_PORT;
 const app = express();
@@ -14,20 +13,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const s = initServer();
+const server = initServer();
 
-const router = s.router(contract, {
+const router = server.router(contract, {
   getCoin: async ({ params: { value } }) => {
-    const coin: Coin = {
-      name: '1 Pound',
-      value: 100,
-      image: '1l.png',
-      size: {
-        width: 23.3,
-        height: 23.43,
-        unit: 'mm',
-      },
-    };
+    // todo filtering
+    const coin = coins[0] satisfies CoinData;
 
     return {
       status: 200,
@@ -36,32 +27,10 @@ const router = s.router(contract, {
     };
   },
   getCoins: async () => {
-    const coins: CoinList = [
-      {
-        name: '1 Pound',
-        value: 100,
-        image: '1l.png',
-        size: {
-          width: 23.3,
-          height: 23.43,
-          unit: 'mm',
-        },
-      } satisfies Coin,
-      {
-        name: '2 Pounds',
-        value: 200,
-        image: '2l.png',
-        size: {
-          width: 28.4,
-          height: 28.4,
-          unit: 'mm',
-        },
-      } satisfies Coin,
-    ];
-
+    const coinList = coins satisfies readonly CoinData[];
     return {
       status: 200,
-      body: coins,
+      body: [...coinList],
     };
   },
 });

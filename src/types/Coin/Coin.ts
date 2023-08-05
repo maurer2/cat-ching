@@ -1,16 +1,20 @@
-import Money from '../Money';
+import { z } from 'zod';
 
-type Millimeter = number;
+import { coinSchema } from '../../schema/coins';
+import type Money from '../Money';
 
-type Coin = {
-  name: string,
-  image: string,
-  amount: Money,
-  size: {
-    width: Millimeter,
-    height: Millimeter,
-    unit: string,
-  },
-};
+// type WithCoinData<T extends object> = T & {
+//   name: string,
+//   image: string,
+//   amount: Money,
+//   size: {
+//     width: number,
+//     height: number,
+//     unit: 'mm' | 'cm',
+//   },
+// };
+// type Coin = WithCoinData<{ amount: Money, }>;
 
-export default Coin;
+export type CoinData = z.infer<typeof coinSchema>;
+// without value
+export type Coin = Omit<CoinData, 'value'> & { amount: Money, };

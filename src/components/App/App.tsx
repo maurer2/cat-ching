@@ -9,7 +9,7 @@ import Footer from '../Footer';
 import Overlay from '../Overlay';
 
 import Money from '../../types/Money';
-import CoinType from '../../types/Coin';
+import type { Coin as CoinType } from '../../types/Coin';
 
 import style from './App.module.scss';
 import moneyReducers from './moneyReducers';
