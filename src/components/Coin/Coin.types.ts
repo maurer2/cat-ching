@@ -1,4 +1,4 @@
-import Money from '../../types/Money';
+import type Money from '../../types/Money';
 import type { Coin } from '../../types/Coin';
 
 export type CoinProps = {

@@ -1,5 +1,1 @@
-import { ReactNode } from 'react';
-
-export type SliderProps = {
-  children: ReactNode;
-};
+export type SliderProps = Record<string, never>;

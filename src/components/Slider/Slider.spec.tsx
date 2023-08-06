@@ -1,11 +1,11 @@
+import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { render } from '@testing-library/react';
 
 import Component from './Slider';
-import * as Types from './Slider.types';
 
 describe('AppContainer', () => {
-  const propsDefault: Types.SliderProps = {
+  const propsDefault: PropsWithChildren = {
     children: <div>Children</div>,
   };
 

@@ -1,10 +1,10 @@
-import type { WheelEvent } from 'react';
+import type { WheelEvent, PropsWithChildren } from 'react';
 import React, { useRef, Children } from 'react';
 
 import style from './Slider.module.scss';
-import type * as Types from './Slider.types';
+// import type * as Types from './Slider.types';
 
-function Slider({ children }: Types.SliderProps): JSX.Element {
+function Slider({ children }: PropsWithChildren): JSX.Element {
   const scrollWrapperElement = useRef<HTMLUListElement | null>(null);
 
   function handleSegmentScrolling(event: WheelEvent<HTMLUListElement>) {
