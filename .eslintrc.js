@@ -42,6 +42,7 @@ module.exports = {
     '@typescript-eslint/lines-between-class-members': 'off',
     '@typescript-eslint/ban-ts-comment': 'off', // temp
     '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
     // react
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
@@ -52,6 +53,7 @@ module.exports = {
       {
         replacements: {
           props: false,
+          ref: false,
         },
       },
     ],

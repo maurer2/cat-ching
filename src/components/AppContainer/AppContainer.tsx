@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { initQueryClient } from '@ts-rest/react-query';
 
 import { contract } from '../../../server/contract';
 import App from '../App';
 import Money from '../../types/Money';
+import OverlayNew from '../OverlayNew/OverlayNew';
+import type { OverlayNewRefFields } from '../OverlayNew/OverlayNew.types';
 import type { Coin } from '../../types/Coin';
 
 const port = import.meta.env.VITE_SERVER_PORT;
@@ -12,7 +14,10 @@ const client = initQueryClient(contract, {
   baseHeaders: {},
 });
 
+// type OverlayNewRefFields2 = ComponentPropsWithRef<typeof OverlayNew>['ref'];
+
 function AppContainer() {
+  const overlayNew = useRef<OverlayNewRefFields>(null);
   const { data, isLoading, error } = client.getCoins.useQuery(
     ['coins'],
     {},
@@ -39,6 +44,23 @@ function AppContainer() {
     });
   }
 
+  // test
+  useEffect(() => {
+    let timeout = -1;
+
+    if (!isLoading) {
+      overlayNew.current?.showOverlay();
+
+      timeout = window.setTimeout(() => {
+        overlayNew.current?.hideOverlay();
+      }, 3000);
+    }
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [overlayNew, isLoading]);
+
   // todo styling
   if (error) {
     return (
@@ -54,7 +76,12 @@ function AppContainer() {
       Loading
     </div>
   ) : (
-    <App coinList={coinList} data-testid="app" />
+    <>
+      <App coinList={coinList} data-testid="app" />
+      <OverlayNew ref={overlayNew}>
+        Has loaded.
+      </OverlayNew>
+    </>
   );
 }
 
