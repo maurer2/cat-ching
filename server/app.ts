@@ -20,17 +20,45 @@ const router = server.router(contract, {
     // todo filtering
     const coin = coins[0] satisfies CoinData;
 
+    // should not be possible -> handled by pathParams
+    if (value.length === 0) {
+      return {
+        status: 400,
+        body: {
+          message: 'Incorrect value parameter',
+        },
+      };
+    }
+
+    if (value === '100') {
+      return {
+        status: 200,
+        body: coin,
+      };
+    }
+
     return {
-      status: 200,
-      // eslint-disable-next-line unicorn/no-null
-      body: (value === '100') ? coin : null,
+      status: 404,
+      body: {
+        message: 'Coin not found',
+      },
     };
   },
   getCoins: async () => {
-    const coinList = coins satisfies readonly CoinData[];
+    const coinList = [...coins satisfies readonly CoinData[]];
+
+    if (coinList.length > 0) {
+      return {
+        status: 200,
+        body: coinList,
+      };
+    }
+
     return {
-      status: 200,
-      body: [...coinList],
+      status: 404,
+      body: {
+        message: 'Coins not found',
+      },
     };
   },
 });
