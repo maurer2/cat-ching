@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@cypress/react": "^6.2.1",
+    "@tanstack/react-query": "^4.32.6",
     "@testing-library/dom": "^8.20.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -24,6 +25,7 @@
     "@total-typescript/ts-reset": "^0.4.2",
     "@ts-rest/core": "^3.26.4",
     "@ts-rest/express": "^3.26.4",
+    "@ts-rest/react-query": "^3.26.4",
     "@types/express": "^4.17.17",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^18.17.1",
