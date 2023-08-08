@@ -1,4 +1,4 @@
-import type { ReducerWithoutAction } from 'react';
+import type { ReducerWithoutAction, PropsWithChildren } from 'react';
 import React, {
   useReducer, useMemo, useCallback,
 } from 'react';
@@ -7,7 +7,9 @@ import clsx from 'clsx';
 import style from './Coin.module.scss';
 import type * as Types from './Coin.types';
 
-function Button({ handleOnClick, children }) {
+const largestWidth = 28.4;
+
+function Button({ handleOnClick, children }: PropsWithChildren<Types.ButtonProps>) {
   return (
     <button
       className={style.button}
@@ -18,8 +20,6 @@ function Button({ handleOnClick, children }) {
     </button>
   );
 }
-
-const largestWidth = 28.4;
 
 function Coin({
   coin: {

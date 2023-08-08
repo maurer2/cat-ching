@@ -6,3 +6,7 @@ export type CoinProps = {
   onAddAmount: (amount: Money) => void,
   onSubtractAmount: (amount: Money) => void,
 };
+
+export type ButtonProps = {
+  handleOnClick: () => void
+};

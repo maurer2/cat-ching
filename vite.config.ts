@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -7,7 +6,7 @@ import sassDts from 'vite-plugin-sass-dts';
 import eslint from 'vite-plugin-eslint';
 import legacy from '@vitejs/plugin-legacy';
 
-export default ({ mode }) => defineConfig({
+export default ({ mode }: { mode: string }) => defineConfig({
   plugins: [
     react(),
     checker({
@@ -26,22 +25,5 @@ export default ({ mode }) => defineConfig({
   ],
   define: {
     'process.env.NODE_ENV': `"${mode}"`,
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: 'src/setupTests.ts',
-    clearMocks: true,
-    // exclude: ['**/*.native.spec.tsx'],
-    coverage: {
-      reporter: ['text', 'lcov'],
-      exclude: [
-        '**/*.spec.tsx',
-        '**/*.spec.ts',
-        '**/*.types.ts',
-        '**/*.styles.ts',
-        '**/setupTests.ts',
-      ],
-    },
   },
 });
