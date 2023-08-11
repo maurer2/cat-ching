@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useEffect } from 'react';
 import { initQueryClient } from '@ts-rest/react-query';
 
@@ -61,26 +62,39 @@ function AppContainer() {
     };
   }, [overlayNew, isLoading]);
 
-  // todo styling
-  if (error) {
-    return (
-      <div role="status">
-        Error
-      </div>
-    );
-  }
-
-  // todo styling
-  return (isLoading || coinList === null) ? (
-    <div role="status">
-      Loading
-    </div>
-  ) : (
+  return (
     <>
-      <App coinList={coinList} data-testid="app" />
-      <OverlayNew ref={overlayNew}>
-        Has loaded.
-      </OverlayNew>
+      {coinList !== null && <App coinList={coinList} data-testid="app" />}
+      <OverlayNew
+        ref={overlayNew}
+        renderOverlay={(handleOverlayClick) => {
+          if (error) {
+            return (
+              <>
+                <h2>
+                  Error.
+                </h2>
+                <p>
+                  An error has occurred, please try again.
+                </p>
+                <button type="button" onClick={handleOverlayClick}>Click</button>
+              </>
+            );
+          }
+          if (isLoading) {
+            return (
+              <div role="status">
+                Loading.
+              </div>
+            );
+          }
+          return (
+            <div role="status">
+              Has loaded.
+            </div>
+          );
+        }}
+      />
     </>
   );
 }
