@@ -1,48 +1,68 @@
 import React, {
-  useImperativeHandle, useRef, forwardRef, useState,
+  useImperativeHandle, useRef, forwardRef,
 } from 'react';
-import type { ForwardedRef, PropsWithChildren, MouseEvent } from 'react';
+import type { ForwardedRef, MouseEvent } from 'react';
+import clsx from 'clsx';
 
 import style from './OverlayNew.module.scss';
 import type * as Types from './OverlayNew.types';
 
 const OverlayNew = forwardRef((
-  { renderOverlay }: PropsWithChildren<Types.OverlayProp>,
+  { renderOverlay }: Types.OverlayProp,
   ref: ForwardedRef<Types.OverlayNewRefFields>,
 ): JSX.Element => {
   const dialogContainerElement = useRef<HTMLDivElement>(null);
   const dialogElement = useRef<HTMLDialogElement>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  // const overlayQueue: number[] = [];
+
+  const isActive = renderOverlay() !== null;
 
   useImperativeHandle(ref, () => ({
     showOverlay(): void {
-      setIsVisible(true);
+      // setIsVisible(true);
       dialogElement.current?.show();
     },
     hideOverlay(): void {
-      setIsVisible(false);
+      // setIsVisible(false);
       dialogElement.current?.close();
     },
-  }), [setIsVisible]);
+  }), []);
 
-  function handleOverlayClick(event: MouseEvent): void {
-    setIsVisible(false);
+  // useEffect(() => {
+  //   let timeout = -1;
+
+  //   if (!isLoading) {
+  //     overlayNew.current?.showOverlay();
+
+  //     timeout = window.setTimeout(() => {
+  //       overlayNew.current?.hideOverlay();
+  //     }, 3000);
+  //   }
+
+  //   return () => {
+  //     window.clearTimeout(timeout);
+  //   };
+  // }, [overlayNew, isLoading]);
+
+  function handleCloseButtonClick(event: MouseEvent): void {
     console.log('handleOverlayClick', event);
   }
 
   return (
     <div
       ref={dialogContainerElement}
-      className={isVisible ? style.overlayNewContainer : undefined}
+      className={clsx(style.overlayNewContainer, {
+        [style.overlayNewContainerIsActive]: isActive,
+      })}
       data-testid="overlayNew"
     >
-      <dialog
-        ref={dialogElement}
-        className={style.overlayNew}
-      >
-        {renderOverlay(handleOverlayClick)}
-      </dialog>
+      {isActive && (
+        <dialog
+          ref={dialogElement}
+          className={style.overlayNew}
+        >
+          {renderOverlay(handleCloseButtonClick)}
+        </dialog>
+      )}
     </div>
   );
 });

@@ -1,8 +1,14 @@
 .overlayNewContainer {
   position: absolute;
   inset: 1rem;
-  display: flex;
-  // pointer-events: none;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  pointer-events: none;
+}
+
+.overlayNewContainerIsActive {
+  pointer-events: all;
   backdrop-filter: grayscale(100%);
 }
 
@@ -11,4 +17,6 @@
   margin: auto;
   padding: 1rem;
   aspect-ratio: 10/1;
+  background: white;
+  text-align: center;
 }

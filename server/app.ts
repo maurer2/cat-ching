@@ -8,10 +8,14 @@ import type { CoinData } from '../src/types/Coin';
 import coins from '../src/data/coins';
 
 const port = process.env.VITE_SERVER_PORT;
+const isDevelopment = process.env.NODE_ENV === 'development';
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use((request, response, next) => {
+  setTimeout(() => next(), isDevelopment ? 2000 : 0);
+});
 
 const server = initServer();
 

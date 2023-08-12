@@ -8,7 +8,7 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx './src'",
     "lint:fix": "npm run lint",
     "start": "vite",
-    "start:server": "ts-node ./server/app.ts",
+    "start:server": "NODE_ENV=development ts-node ./server/app.ts",
     "test": "vitest --coverage",
     "test-native": "ts-node ./src/components/App/moneyReducers/money.reducers.spek.tsx",
     "test-types": "tsc --noEmit --skipLibCheck",

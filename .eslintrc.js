@@ -40,7 +40,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     // ts
     '@typescript-eslint/lines-between-class-members': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off', // temp
     '@typescript-eslint/consistent-type-imports': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
     // react
@@ -59,5 +58,6 @@ module.exports = {
       },
     ],
     'unicorn/consistent-function-scoping': 'off',
+    'unicorn/no-null': 'off'
   },
 };

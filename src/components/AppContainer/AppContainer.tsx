@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { initQueryClient } from '@ts-rest/react-query';
 
 import { contract } from '../../../server/contract';
@@ -19,13 +18,14 @@ const client = initQueryClient(contract, {
 
 function AppContainer() {
   const overlayNew = useRef<OverlayNewRefFields>(null);
-  const { data, isLoading, error } = client.getCoins.useQuery(
+  const {
+    data, isFetching, error, refetch, isSuccess, isError,
+  } = client.getCoins.useQuery(
     ['coins'],
     {},
     { staleTime: Number.POSITIVE_INFINITY },
   );
 
-  // eslint-disable-next-line unicorn/no-null
   let coinList: ReadonlyArray<Coin> | null = null;
   if (data?.status && data?.body !== null) {
     coinList = data.body.map((coin) => {
@@ -45,54 +45,54 @@ function AppContainer() {
     });
   }
 
-  // test
-  useEffect(() => {
-    let timeout = -1;
-
-    if (!isLoading) {
-      overlayNew.current?.showOverlay();
-
-      timeout = window.setTimeout(() => {
-        overlayNew.current?.hideOverlay();
-      }, 3000);
-    }
-
-    return () => {
-      window.clearTimeout(timeout);
-    };
-  }, [overlayNew, isLoading]);
-
   return (
     <>
       {coinList !== null && <App coinList={coinList} data-testid="app" />}
+      {/* todo: move into a new component */}
       <OverlayNew
         ref={overlayNew}
-        renderOverlay={(handleOverlayClick) => {
-          if (error) {
+        renderOverlay={(handleCloseButtonClick) => {
+          if (isFetching) {
+            return (
+              <div role="status">
+                Loading
+              </div>
+            );
+          }
+
+          if (isError) {
             return (
               <>
                 <h2>
-                  Error.
+                  Error
                 </h2>
                 <p>
                   An error has occurred, please try again.
                 </p>
-                <button type="button" onClick={handleOverlayClick}>Click</button>
+                <pre>
+                  {error.status}
+                </pre>
+                <button
+                  type="button"
+                  onClick={handleCloseButtonClick}
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  onClick={() => refetch()}
+                >
+                  Refetch
+                </button>
               </>
             );
           }
-          if (isLoading) {
-            return (
-              <div role="status">
-                Loading.
-              </div>
-            );
+
+          if (isSuccess) {
+            return null;
           }
-          return (
-            <div role="status">
-              Has loaded.
-            </div>
-          );
+
+          return null;
         }}
       />
     </>

@@ -4,7 +4,10 @@ import type { MouseEvent, ReactElement } from 'react';
 // };
 
 export type OverlayProp = {
-  renderOverlay: (handleOverlayClick: (event: MouseEvent) => void) => ReactElement | null,
+  renderOverlay: (
+    handleOverlayClick?: (event: MouseEvent) => void,
+    handleCloseButtonClick?: (event: MouseEvent) => void
+  ) => ReactElement | null,
   // onClose?: (event: SyntheticEvent) => void
 };
 
