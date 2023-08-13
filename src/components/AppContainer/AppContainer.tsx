@@ -47,7 +47,7 @@ function AppContainer() {
           }
 
           if (coinData.type === 'error') {
-            const { errorDetails } = coinData;
+            const { errorDetails, triggerRefetch } = coinData;
             return (
               <>
                 <h2>
@@ -64,13 +64,13 @@ function AppContainer() {
                 <button
                   type="button"
                   onClick={handleCloseButtonClick}
+                  disabled
                 >
                   Close
                 </button>
                 <button
                   type="button"
-                  // onClick={() => refetch()}
-                  onClick={() => {}}
+                  onClick={triggerRefetch}
                 >
                   Refetch
                 </button>

@@ -1,4 +1,6 @@
 import { initQueryClient } from '@ts-rest/react-query';
+import { ZodError } from 'zod';
+
 import { contract } from '../../../server/contract';
 import type { CoinData } from '../../types/Coin';
 
@@ -13,7 +15,8 @@ type UseCoinsSuccess = {
 
 type UseCoinsError = {
   type: 'error',
-  errorDetails?: string, // todo
+  errorDetails?: string,
+  triggerRefetch: () => void,
 };
 
 export default function useCoins(
@@ -21,6 +24,7 @@ export default function useCoins(
   port: string,
 ): UseCoinsIsFetching | UseCoinsSuccess | UseCoinsError {
   const client = initQueryClient(contract, {
+    // baseUrl: `${url}${port}`,
     baseUrl: `${url}:${port}`,
     baseHeaders: {},
   });
@@ -28,14 +32,18 @@ export default function useCoins(
   const {
     data,
     isFetching,
-    // error,
-    // refetch,
-    // isSuccess,
+    error,
+    refetch,
     isError,
+    // isLoadingError,
   } = client.getCoins.useQuery(
     ['coins'],
     {},
-    { staleTime: Number.POSITIVE_INFINITY },
+    {
+      staleTime: Number.POSITIVE_INFINITY,
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false,
+    },
   );
 
   if (isFetching) {
@@ -47,7 +55,11 @@ export default function useCoins(
   if (isError || !data?.body?.length) {
     return {
       type: 'error',
-      errorDetails: 'Error',
+      // defined in server/app.ts
+      errorDetails: (error?.status === 404) // discriminated union
+        ? error.body.message
+        : undefined,
+      triggerRefetch: () => refetch(),
     } satisfies UseCoinsError;
   }
 
