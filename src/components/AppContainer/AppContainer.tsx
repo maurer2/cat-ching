@@ -1,7 +1,5 @@
 import React, { useRef } from 'react';
-import { initQueryClient } from '@ts-rest/react-query';
 
-import { contract } from '../../../server/contract';
 import App from '../App';
 import Money from '../../types/Money';
 import OverlayNew from '../OverlayNew/OverlayNew';
@@ -11,28 +9,14 @@ import useCoins from '../../hooks/useCoins';
 
 const url: string = import.meta.env.VITE_CLIENT_URL;
 const port: string = import.meta.env.VITE_SERVER_PORT;
-const client = initQueryClient(contract, {
-  baseUrl: `http://localhost:${port}`,
-  baseHeaders: {},
-});
 
 // type OverlayNewRefFields2 = ComponentPropsWithRef<typeof OverlayNew>['ref'];
 
 function AppContainer() {
   const overlayNew = useRef<OverlayNewRefFields>(null);
-  const {
-    data, isFetching, error, refetch, isSuccess, isError,
-  } = client.getCoins.useQuery(
-    ['coins'],
-    {},
-    { staleTime: Number.POSITIVE_INFINITY },
-  );
-
   const coinData = useCoins(url, port);
-
-  let coinList: ReadonlyArray<Coin> | null = null;
-  if (coinData.type === 'success') {
-    coinList = coinData.data.map((coin) => {
+  const coinList: ReadonlyArray<Coin> | null = (coinData.type === 'success')
+    ? coinData.data.map((coin) => {
       const {
         name,
         image,
@@ -46,17 +30,15 @@ function AppContainer() {
         size,
         amount: Money.fromNumber(value, 'GBP'),
       };
-    });
-  }
-
+    })
+    : null;
   return (
     <>
       {coinList !== null && <App coinList={coinList} data-testid="app" />}
-      {/* todo: move into a new component */}
       <OverlayNew
         ref={overlayNew}
         renderOverlay={(handleCloseButtonClick) => {
-          if (isFetching) {
+          if (coinData.type === 'fetching') {
             return (
               <div role="status">
                 Loading
@@ -64,7 +46,8 @@ function AppContainer() {
             );
           }
 
-          if (isError) {
+          if (coinData.type === 'error') {
+            const { errorDetails } = coinData;
             return (
               <>
                 <h2>
@@ -73,9 +56,11 @@ function AppContainer() {
                 <p>
                   An error has occurred, please try again.
                 </p>
-                <pre>
-                  {error.status}
-                </pre>
+                {errorDetails && (
+                  <pre>
+                    {errorDetails}
+                  </pre>
+                )}
                 <button
                   type="button"
                   onClick={handleCloseButtonClick}
@@ -84,7 +69,8 @@ function AppContainer() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => refetch()}
+                  // onClick={() => refetch()}
+                  onClick={() => {}}
                 >
                   Refetch
                 </button>
@@ -92,7 +78,7 @@ function AppContainer() {
             );
           }
 
-          if (isSuccess) {
+          if (coinData.type === 'success') {
             return null;
           }
 
