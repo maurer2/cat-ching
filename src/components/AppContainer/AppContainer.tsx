@@ -7,8 +7,10 @@ import Money from '../../types/Money';
 import OverlayNew from '../OverlayNew/OverlayNew';
 import type { OverlayNewRefFields } from '../OverlayNew/OverlayNew.types';
 import type { Coin } from '../../types/Coin';
+import useCoins from '../../hooks/useCoins';
 
-const port = import.meta.env.VITE_SERVER_PORT;
+const url: string = import.meta.env.VITE_CLIENT_URL;
+const port: string = import.meta.env.VITE_SERVER_PORT;
 const client = initQueryClient(contract, {
   baseUrl: `http://localhost:${port}`,
   baseHeaders: {},
@@ -26,9 +28,11 @@ function AppContainer() {
     { staleTime: Number.POSITIVE_INFINITY },
   );
 
+  const coinData = useCoins(url, port);
+
   let coinList: ReadonlyArray<Coin> | null = null;
-  if (data?.status && data?.body !== null) {
-    coinList = data.body.map((coin) => {
+  if (coinData.type === 'success') {
+    coinList = coinData.data.map((coin) => {
       const {
         name,
         image,
