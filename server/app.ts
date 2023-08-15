@@ -51,6 +51,7 @@ const router = server.router(contract, {
   getCoins: async () => {
     const coinList = [...coins satisfies readonly CoinData[]];
 
+    /// if (coinList.length === 0) {
     if (coinList.length > 0) {
       return {
         status: 200,
