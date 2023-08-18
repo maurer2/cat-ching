@@ -6,6 +6,7 @@ import OverlayNew from '../OverlayNew/OverlayNew';
 import type { OverlayNewRefFields } from '../OverlayNew/OverlayNew.types';
 import type { Coin } from '../../types/Coin';
 import useCoins from '../../hooks/useCoins';
+import LoadingIndicator from '../LoadingIndicator';
 
 const url: string = import.meta.env.VITE_CLIENT_URL;
 const port: string = import.meta.env.VITE_SERVER_PORT;
@@ -85,6 +86,7 @@ function AppContainer() {
           return null;
         }}
       />
+      {/* <LoadingIndicator /> */}
     </>
   );
 }

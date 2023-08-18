@@ -1,5 +1,4 @@
 import { initQueryClient } from '@ts-rest/react-query';
-import { ZodError } from 'zod';
 
 import { contract } from '../../../server/contract';
 import type { CoinData } from '../../types/Coin';
