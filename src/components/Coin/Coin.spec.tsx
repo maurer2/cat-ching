@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import Component from './Coin';
-import * as Types from './Coin.types';
+import type * as Types from './Coin.types';
 
 import Money from '../../types/Money';
 

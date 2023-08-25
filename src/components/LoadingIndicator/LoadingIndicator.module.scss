@@ -1,6 +1,17 @@
+.container {
+  position: fixed;
+  inset: 0;
+  bottom: auto;
+  background: white;
+}
+
 .circle {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: red;
+  background: conic-gradient(
+    red 0deg 120deg,
+    green 120deg 240deg,
+    blue 240deg 360deg
+  );
 }
