@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState, useRef } from 'react';
+import clsx from 'clsx';
 
 import style from './LoadingIndicator.module.scss';
+import coinImage from '../../assets/images/50p-ciiir.png';
 
 const amounts = [1, 10, 100];
 
@@ -34,33 +36,19 @@ function LoadingIndicator(): JSX.Element {
     };
   }, []);
 
-  useEffect(() => {
-    const keyframes = [
-      // 0
-      { background: 'conic-gradient(transparent 0deg 360deg' },
-      // 33%
-      { background: 'conic-gradient(red 0deg 120deg, transparent 120deg 360deg)' },
-      // 66%
-      { background: 'conic-gradient(red 0deg 120deg, green 120deg 240deg, transparent 240deg 360deg)' },
-      // 100%
-      { background: 'conic-gradient(red 0deg 120deg, green 120deg 240deg, blue 240deg 360deg)' },
-    ];
-
-    const keyframesOptions: KeyframeAnimationOptions = {
-      duration: 1000,
-      iterations: 1,
-      fill: 'forwards',
-    };
-
-    const numberOfFinishedRequests = requests.filter(Boolean).length;
-    console.log(numberOfFinishedRequests);
-
-    circleElement?.current?.animate(keyframes, keyframesOptions);
-  }, [requests]);
+  const numberOfFinishedRequests = requests.filter(Boolean).length;
 
   return (
     <figure data-testid="LoadingIndicator" className={style.container}>
-      <div className={style.circle} ref={circleElement} />
+      <div className={clsx(style.imageOverlayContainer, {
+        [style.imageOverlayContainerOneThird]: numberOfFinishedRequests === 1,
+        [style.imageOverlayContainerTwoThird]: numberOfFinishedRequests === 2,
+        [style.imageOverlayContainerThreeThird]: numberOfFinishedRequests === 3,
+      })}
+      >
+        <img src={coinImage} alt="" className={style.image} />
+      </div>
+      <div ref={circleElement} />
       <figcaption>
         <pre>{JSON.stringify(requests)}</pre>
       </figcaption>
