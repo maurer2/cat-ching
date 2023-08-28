@@ -11,26 +11,6 @@
   background: white;
 }
 
-.imageOverlayContainerOneThird {
-  background: conic-gradient(
-    transparent 0deg 120deg,
-    white 120deg 240deg,
-    white 240deg 360deg
-  );
-}
-
-.imageOverlayContainerTwoThird {
-  background: conic-gradient(
-    transparent 0deg 120deg,
-    transparent 120deg 240deg,
-    white 240deg 360deg
-  );
-}
-
-.imageOverlayContainerThreeThird {
-  background: none;
-}
-
 .image {
   display: block;
   position: relative;

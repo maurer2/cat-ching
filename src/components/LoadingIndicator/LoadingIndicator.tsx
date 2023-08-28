@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { CSSProperties } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
-import clsx from 'clsx';
 
 import style from './LoadingIndicator.module.scss';
 import coinImage from '../../assets/images/50p-ciiir.png';
@@ -37,15 +37,28 @@ function LoadingIndicator(): JSX.Element {
   }, []);
 
   const numberOfFinishedRequests = requests.filter(Boolean).length;
+  const backgroundSections = requests.map((_, index, currentArray) => {
+    const isAnInbetweenSection = (index !== 0) && (index !== currentArray.length - 1);
+    const lengthOfSection = 360 / currentArray.length;
+
+    // section borders
+    // if (isAnInbetweenSection) {
+    //   return `black ${lengthOfSection * index}deg ${lengthOfSection * index}deg`;
+    // }
+
+    if (index < numberOfFinishedRequests) {
+      return `transparent ${lengthOfSection * index}deg ${lengthOfSection + (lengthOfSection * index)}deg`;
+    }
+    return `white ${lengthOfSection * index}deg ${lengthOfSection + (lengthOfSection * index)}deg`;
+  });
+
+  const conicalGradient: CSSProperties = {
+    background: `conic-gradient(${backgroundSections.join(', ')})`,
+  };
 
   return (
     <figure data-testid="LoadingIndicator" className={style.container}>
-      <div className={clsx(style.imageOverlayContainer, {
-        [style.imageOverlayContainerOneThird]: numberOfFinishedRequests === 1,
-        [style.imageOverlayContainerTwoThird]: numberOfFinishedRequests === 2,
-        [style.imageOverlayContainerThreeThird]: numberOfFinishedRequests === 3,
-      })}
-      >
+      <div className={style.imageOverlayContainer} style={conicalGradient}>
         <img src={coinImage} alt="" className={style.image} />
       </div>
       <div ref={circleElement} />
