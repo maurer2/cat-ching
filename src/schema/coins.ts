@@ -9,7 +9,7 @@ export const coinSchema = z
       .object({
         width: z.number().positive(),
         height: z.number().positive(),
-        unit: z.union([z.literal('mm'), z.literal('cm')]),
+        unit: z.enum(['mm', 'cm']),
       })
       .strict(),
   })
